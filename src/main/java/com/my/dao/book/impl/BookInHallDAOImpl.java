@@ -4,7 +4,7 @@ import com.my.dao.book.BookInHallDAO;
 import com.my.db.DBConnector;
 import com.my.entities.BookInHall;
 import com.my.exception.ApplicationException;
-import com.my.services.InstanceService1;
+import com.my.services.InstanceService;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -117,8 +117,8 @@ public class BookInHallDAOImpl implements BookInHallDAO {
 
     private BookInHall createBookInHall(ResultSet rs) throws SQLException {
         BookInHall bookInHall = new BookInHall();
-        bookInHall.setBook(InstanceService1.buildBook(rs,true));
-        bookInHall.setUser(InstanceService1.buildUser(rs,true));
+        bookInHall.setBook(InstanceService.buildBook(rs,true));
+        bookInHall.setUser(InstanceService.buildUser(rs,true));
         return bookInHall;
     }
 }

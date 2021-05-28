@@ -26,7 +26,8 @@ public class UnblockUserCommand extends Command {
             User user = userDAO.getUserById(userId);
             if (user.isBlocked()) {
                 userDAO.changeBlockStatusUserById(userId, 0);
-                request.getSession().setAttribute("block_result", "User " + user.getEmail() + " unblocked");
+                request.getSession().setAttribute("block_result", "unblocked");
+                request.getSession().setAttribute("blocked_user_email",user.getEmail());
             }
         } catch (ApplicationException e) {
             LOGGER.error(e);

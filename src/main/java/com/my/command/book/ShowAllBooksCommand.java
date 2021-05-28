@@ -24,7 +24,11 @@ public class ShowAllBooksCommand extends Command {
         String pageNum = request.getParameter("page");
         int page = 1;
         if (pageNum != null){
-            page = Integer.parseInt(pageNum);
+            try {
+                page = Integer.parseInt(pageNum);
+            }catch (NumberFormatException exception){
+                throw new ApplicationException("Incorrect data",exception);
+            }
         }
         BookDAO bookDAO = daoFactory.getBookDAO();
         if (page > 1){

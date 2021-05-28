@@ -1,10 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="h" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="/WEB-INF/mytags.tld" prefix="m" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
     <title>Personal account</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
 <h:header/>
@@ -17,50 +20,50 @@
     </thead>
     <tbody>
     <tr>
-        <th scope="row">Email:</th>
+        <th scope="row"><fmt:message key="email"/>:</th>
         <td>${sessionScope.user.email}</td>
     </tr>
     <tr>
-        <th scope="row">First name:</th>
+        <th scope="row"><fmt:message key="f_name"/>:</th>
         <td>${sessionScope.user.firstName}</td>
     </tr>
     <tr>
-        <th scope="row">Last name:</th>
+        <th scope="row"><fmt:message key="l_name"/>:</th>
         <td>${sessionScope.user.lastName}</td>
     </tr>
     <c:if test="${sessionScope.user.role.roleName == 'user'}">
         <tr>
-            <th scope="row">Blocked:</th>
-            <td>${sessionScope.user.blocked}</td>
+            <th scope="row"><fmt:message key="blocked"/>:</th>
+            <td><m:blockStatus status="${sessionScope.user.blocked}"/></td>
         </tr>
     </c:if>
     <tr>
-        <th scope="row">Role:</th>
+        <th scope="row"><fmt:message key="role"/>:</th>
         <td>${sessionScope.user.role.roleName}</td>
     </tr>
     </tbody>
 </table>
 <c:choose>
     <c:when test="${sessionScope.user.role.roleName == 'user'}">
-        <h3>Ordered books:</h3>
+        <h3><fmt:message key="ordered_books"/>:</h3>
         <div class="card" style="width: 18rem;">
             <ul class="list-group list-group-flush">
                 <c:forEach var="order" items="${sessionScope.ordered_books}">
-                    <li class="list-group-item">&laquo;${order.book.title}&raquo; ${order.book.author}.(ordered: ${order.type.toString()})</li>
+                    <li class="list-group-item">&laquo;${order.book.title}&raquo; ${order.book.author}.(<fmt:message key="ordered"/>: <fmt:message key="${order.type.type}"/>)</li>
                 </c:forEach>
             </ul>
         </div>
         <hr/>
-        <h3>Books on ticket:</h3>
+        <h3><fmt:message key="books_on_ticket"/>:</h3>
         <div class="card" style="width: 18rem;">
             <ul class="list-group list-group-flush">
                 <c:forEach var="bookOnTicket" items="${sessionScope.books_on_ticket}">
-                    <li class="list-group-item">&laquo;${bookOnTicket.book.title}&raquo; ${bookOnTicket.book.author}.(until: ${bookOnTicket.untilDate})<br/><c:if test="${bookOnTicket.fine>0}"><p style="color: red">FINE: ${bookOnTicket.fine}</p> </c:if> </li>
+                    <li class="list-group-item">&laquo;${bookOnTicket.book.title}&raquo; ${bookOnTicket.book.author}.(<fmt:message key="until"/>: ${bookOnTicket.untilDate})<br/><c:if test="${bookOnTicket.fine>0}"><p style="color: red"><fmt:message key="fine"/>: ${bookOnTicket.fine}</p> </c:if> </li>
                 </c:forEach>
             </ul>
         </div>
         <hr/>
-        <h3>Books in hall:</h3>
+        <h3><fmt:message key="books_in_hall"/>:</h3>
         <div class="card" style="width: 18rem;">
             <ul class="list-group list-group-flush">
                 <c:forEach var="bookInHall" items="${sessionScope.books_in_hall}">
@@ -70,16 +73,15 @@
         </div>
     </c:when>
     <c:when test="${sessionScope.user.role.roleName == 'librarian'}">
-        <a class="btn btn-outline-secondary" style="text-decoration: none;color: #000 !important" href="account?command=show_all_orders" role="button">Show all orders</a>
-        <a class="btn btn-outline-secondary" style="text-decoration: none;color: #000 !important" href="account?command=show_all_users" role="button">Show all users</a>
+        <a class="btn btn-outline-secondary" style="text-decoration: none;color: #000 !important" href="account?command=show_all_orders" role="button"><fmt:message key="show_all_orders"/></a>
+        <a class="btn btn-outline-secondary" style="text-decoration: none;color: #000 !important" href="account?command=show_all_users" role="button"><fmt:message key="show_all_users"/></a>
     </c:when>
     <c:when test="${sessionScope.user.role.roleName == 'admin'}">
-        <a class="btn btn-outline-secondary" style="text-decoration: none;color: #000 !important" href="account?command=librarians_settings" role="button">Add/delete librarian</a>
-        <a class="btn btn-outline-secondary" style="text-decoration: none;color: #000 !important" href="account?command=users_settings" role="button">Block/unblock user</a>
+        <a class="btn btn-outline-secondary" style="text-decoration: none;color: #000 !important" href="account?command=librarians_settings" role="button"><fmt:message key="librarian_settings"/></a>
+        <a class="btn btn-outline-secondary" style="text-decoration: none;color: #000 !important" href="account?command=users_settings" role="button"><fmt:message key="user_settings"/></a>
     </c:when>
 </c:choose>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>

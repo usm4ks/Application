@@ -26,10 +26,10 @@ public class AddLibrarianCommand extends Command {
         try {
             User user = userDAO.getUserByEmail(userEmail);
             if (user == null) {
-                request.getSession().setAttribute("add_result", "User with this email not found");
+                request.getSession().setAttribute("add_result", "user_with_this_email_not_found");
             } else if (user.getRole().equals(UserRole.USER)) {
                 userDAO.changeRoleUserById(user.getId(), UserRole.LIBRARIAN.getRoleName());
-                request.getSession().setAttribute("add_result", "User " + userEmail + " is librarian");
+                request.getSession().setAttribute("add_result", "user_is_librarian_now");
             }
         } catch (ApplicationException e) {
             LOGGER.error(e);

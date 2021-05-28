@@ -32,6 +32,7 @@ public class BookListController extends HttpServlet {
         availableCommands.add(CommandConstants.ADD_NEW_BOOK);
         availableCommands.add(CommandConstants.DELETE_BOOK);
         availableCommands.add(CommandConstants.LOG_OUT);
+        availableCommands.add(CommandConstants.SET_LANG);
     }
 
     @Override

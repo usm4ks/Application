@@ -21,7 +21,7 @@ public class AccessFilter implements Filter {
 
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         specialCommands = new HashMap<>();
         specialCommands.put(CommandConstants.USERS_SETTINGS, UserRole.ADMIN);
         specialCommands.put(CommandConstants.UNBLOCK_USER, UserRole.ADMIN);
@@ -42,6 +42,7 @@ public class AccessFilter implements Filter {
         unauthorizedCommands.add(CommandConstants.SEARCH_BOOK);
         unauthorizedCommands.add(CommandConstants.SHOW_ALL_BOOKS);
         unauthorizedCommands.add(CommandConstants.SHOW_SORTED_BOOKS);
+        unauthorizedCommands.add(CommandConstants.SET_LANG);
     }
 
     @Override

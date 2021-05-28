@@ -25,6 +25,7 @@ public class CommandConstants {
     public final static String ADD_NEW_BOOK_FORM = "add_new_book_form";
     public final static String ADD_NEW_BOOK = "add_new_book";
     public final static String DELETE_BOOK = "delete_book";
+    public final static String SET_LANG = "set_lang";
 
     private CommandConstants(){}
 }

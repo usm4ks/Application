@@ -28,6 +28,7 @@ public class RegistrationController extends HttpServlet {
     public void init(){
         commandFactory = (CommandFactory) getServletContext().getAttribute("commandFactory");
         availableCommands.add(CommandConstants.REGISTRATION);
+        availableCommands.add(CommandConstants.SET_LANG);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

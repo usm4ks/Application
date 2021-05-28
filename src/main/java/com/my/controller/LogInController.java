@@ -22,6 +22,7 @@ public class LogInController extends HttpServlet {
     public void init(){
         commandFactory = (CommandFactory) getServletContext().getAttribute("commandFactory");
         availableCommands.add(CommandConstants.LOG_IN);
+        availableCommands.add(CommandConstants.SET_LANG);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

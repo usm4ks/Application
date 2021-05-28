@@ -22,8 +22,11 @@ public class OrderBookCommand extends Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ApplicationException {
+        if (null != request.getSession().getAttribute("search_result")){
+            request.getSession().removeAttribute("search_result");
+        }
         User user = (User) request.getSession().getAttribute("user");
-        if (user.isBlocked()){
+        if (daoFactory.getUserDAO().getUserById(user.getId()).isBlocked()){
             throw new ApplicationException("Blocked user can`t order book",new Exception());
         }
         int bookId = Integer.parseInt(request.getParameter("bookId"));
@@ -40,24 +43,24 @@ public class OrderBookCommand extends Command {
     private String checkAndMakeOrder(int userId,int bookId,String type) throws ApplicationException {
         Book book = daoFactory.getBookDAO().getBookById(bookId);
         if (book == null){
-            return "Book not found";
+            return "book_not_found";
         }
         BookOnTicket bookOnTicket = daoFactory.getBookOnTicketDAO().getBookOnUserTicket(userId,bookId);
         if (bookOnTicket != null){
-            return "Book is already on your ticket";
+            return "book_is_already_on_your_ticket";
         }
         BookInHall bookInHall = daoFactory.getBookInHallDAO().getUserBookInHall(userId, bookId);
         if (bookInHall != null){
-            return "You have this book in hall";
+            return "you_have_this_book_in_hall";
         }
         Order userOrder = daoFactory.getOrderDAO().getUserOrder(userId, bookId);
         if (userOrder != null){
-            return "Book is already ordered";
+            return "book_is_already_ordered";
         }
         if (book.getAmount() > 0){
             OrderBookService.getInstance().orderBook(userId,bookId,OrderType.valueOf(type.toUpperCase(Locale.ROOT)));
-            return "Book was added";
+            return "book_was_added";
         }
-        return "Book is not added ;(";
+        return "book_is_not_added";
     }
 }

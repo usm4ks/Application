@@ -4,7 +4,7 @@ import com.my.dao.user.UserDAO;
 import com.my.db.DBConnector;
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
-import com.my.services.InstanceService1;
+import com.my.services.InstanceService;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -68,7 +68,7 @@ public class UserDAOImpl implements UserDAO {
             pst.setString(1,email);
             rs = pst.executeQuery();
             if (rs.next()){
-                user = InstanceService1.buildUser(rs,false);
+                user = InstanceService.buildUser(rs,false);
             }
         } catch (SQLException e) {
             LOGGER.error("getUserByEmail() error",e);
@@ -90,7 +90,7 @@ public class UserDAOImpl implements UserDAO {
             pst.setInt(1,id);
             rs = pst.executeQuery();
             if (rs.next()){
-                user = InstanceService1.buildUser(rs,false);
+                user = InstanceService.buildUser(rs,false);
             }
         } catch (SQLException e) {
             LOGGER.error("getUserById() error",e);
@@ -113,7 +113,7 @@ public class UserDAOImpl implements UserDAO {
             pst.setString(1,role);
             rs = pst.executeQuery();
             while (rs.next()){
-                userList.add(InstanceService1.buildUser(rs,false));
+                userList.add(InstanceService.buildUser(rs,false));
             }
         } catch (SQLException e) {
             LOGGER.error("getAllUsersByRole() error",e);

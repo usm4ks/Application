@@ -60,6 +60,7 @@ public class CommandFactory {
             commands.put(CommandConstants.ADD_NEW_BOOK_FORM,new AddNewBookFormCommand(daoFactory));
             commands.put(CommandConstants.ADD_NEW_BOOK, new AddNewBookCommand(daoFactory));
             commands.put(CommandConstants.DELETE_BOOK, new DeleteBookCommand(daoFactory));
+            commands.put(CommandConstants.SET_LANG,new SetLangCommand(daoFactory));
         }
     }
 

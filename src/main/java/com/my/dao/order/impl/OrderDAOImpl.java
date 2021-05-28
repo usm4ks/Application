@@ -6,7 +6,7 @@ import com.my.entities.Order;
 import com.my.enums.OrderType;
 import com.my.exception.ApplicationException;
 
-import com.my.services.InstanceService1;
+import com.my.services.InstanceService;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -121,8 +121,8 @@ public class OrderDAOImpl implements OrderDAO {
 
     private Order createOrder(ResultSet rs) throws SQLException {
         return new Order(
-                InstanceService1.buildUser(rs,true),
-                InstanceService1.buildBook(rs,true),
+                InstanceService.buildUser(rs,true),
+                InstanceService.buildBook(rs,true),
                 OrderType.valueOf(rs.getString("type").toUpperCase(Locale.ROOT)));
     }
 }

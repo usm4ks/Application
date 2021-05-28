@@ -25,12 +25,15 @@ public class AcceptOrderCommand  extends Command {
         int bookId = Integer.parseInt(request.getParameter("bookId"));
         String orderType = request.getParameter("type");
         if (orderType.equals(OrderType.ON_TICKET.getType())) {
-            Date date = Date.valueOf(request.getParameter("until_date"));
             try {
+                Date date = Date.valueOf(request.getParameter("until_date"));
                 OrderBookService.getInstance().acceptOrder(userId, bookId, date,OrderType.ON_TICKET);
             } catch (ApplicationException e) {
                 LOGGER.error(e);
                 throw new ApplicationException("Can't accept order",e);
+            } catch (IllegalArgumentException e){
+                LOGGER.error(e);
+                throw new ApplicationException("Incorrect data for date",e);
             }
         } else if (orderType.equals(OrderType.IN_HALL.getType())) {
             try {

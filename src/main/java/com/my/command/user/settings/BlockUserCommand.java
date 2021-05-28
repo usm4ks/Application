@@ -26,12 +26,11 @@ public class BlockUserCommand extends Command {
         try {
             User user = userDAO.getUserByEmail(userEmail);
             if (user == null){
-                request.getSession().setAttribute("block_result","User with this email not found");
+                request.getSession().setAttribute("block_result","user_with_this_email_not_found");
             }
             else if (user.getRole().equals(UserRole.USER) && !user.isBlocked()){
                 userDAO.changeBlockStatusUserById(user.getId(),1);
-                request.getSession().setAttribute("block_result","User " + userEmail + " blocked");
-
+                request.getSession().setAttribute("block_result","blocked");
             }
         } catch (ApplicationException e) {
             LOGGER.error(e);

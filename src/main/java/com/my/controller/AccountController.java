@@ -34,6 +34,7 @@ public class AccountController extends HttpServlet {
         availableCommands.add(CommandConstants.DELETE_LIBRARIAN);
         availableCommands.add(CommandConstants.ADD_LIBRARIAN);
         availableCommands.add(CommandConstants.LOG_OUT);
+        availableCommands.add(CommandConstants.SET_LANG);
     }
 
     @Override

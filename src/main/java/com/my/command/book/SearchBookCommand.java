@@ -21,6 +21,9 @@ public class SearchBookCommand extends Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ApplicationException {
+        if (null != request.getSession().getAttribute("order_result")){
+            request.getSession().removeAttribute("order_result");
+        }
         BookDAO bookDAO = daoFactory.getBookDAO();
         String s = request.getParameter("search");
         try {
@@ -28,7 +31,7 @@ public class SearchBookCommand extends Command {
             if (books.size() != 0) {
                 request.setAttribute("book_list", books);
             } else {
-                request.setAttribute("search_result", "Book is not found");
+                request.setAttribute("search_result", "book_is_not_found");
             }
         } catch (ApplicationException e) {
             LOGGER.error(e);

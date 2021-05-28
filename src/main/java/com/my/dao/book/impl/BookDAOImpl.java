@@ -4,7 +4,7 @@ import com.my.dao.book.BookDAO;
 import com.my.db.DBConnector;
 import com.my.entities.Book;
 import com.my.exception.ApplicationException;
-import com.my.services.InstanceService1;
+import com.my.services.InstanceService;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -48,7 +48,7 @@ public class BookDAOImpl implements BookDAO {
             pst.setInt(1,page*5-5);
             rs = pst.executeQuery();
             while (rs.next()){
-                bookList.add(InstanceService1.buildBook(rs,false));
+                bookList.add(InstanceService.buildBook(rs,false));
             }
         } catch (SQLException e) {
             LOGGER.error("getAllBooks() error",e);
@@ -72,7 +72,7 @@ public class BookDAOImpl implements BookDAO {
             pst.setInt(1,page*5-5);
             rs = pst.executeQuery();
             while (rs.next()){
-                bookList.add(InstanceService1.buildBook(rs,false));
+                bookList.add(InstanceService.buildBook(rs,false));
             }
         } catch (SQLException e) {
             LOGGER.error("getSortedBooks() error",e);
@@ -98,7 +98,7 @@ public class BookDAOImpl implements BookDAO {
             pst.setString(2,parameter);
             rs = pst.executeQuery();
             while (rs.next()){
-                bookList.add(InstanceService1.buildBook(rs,false));
+                bookList.add(InstanceService.buildBook(rs,false));
             }
         } catch (SQLException e) {
             LOGGER.error("searchBook() error",e);
@@ -121,7 +121,7 @@ public class BookDAOImpl implements BookDAO {
             pst.setInt(1,id);
             rs = pst.executeQuery();
             if (rs.next()){
-                book = InstanceService1.buildBook(rs,false);
+                book = InstanceService.buildBook(rs,false);
             }
         } catch (SQLException e) {
             LOGGER.error("getBookById() error",e);

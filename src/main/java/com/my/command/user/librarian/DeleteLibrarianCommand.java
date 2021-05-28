@@ -27,7 +27,7 @@ public class DeleteLibrarianCommand extends Command {
             User user = userDAO.getUserById(userId);
             if (user.getRole().equals(UserRole.LIBRARIAN)) {
                 userDAO.changeRoleUserById(userId, UserRole.USER.getRoleName());
-                request.getSession().setAttribute("add_result", "User " + user.getEmail() + " is not librarian");
+                request.getSession().setAttribute("add_result", "user_is_not_librarian_more");
             }
         } catch (ApplicationException e) {
             LOGGER.error(e);

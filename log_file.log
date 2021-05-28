@@ -358,3 +358,28 @@ com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long
 2021-05-26 12:16:05 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Incorrect input data for password
 2021-05-26 12:17:45 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Incorrect input data for password (need 6-18 symbols)
 2021-05-26 12:17:53 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Incorrect input data for password (need 6-18 symbols)
+2021-05-26 19:06:13 ERROR ControllerHelper:41 - com.my.exception.ApplicationException: Incorrect data
+2021-05-27 12:33:12 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:33:14 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:33:19 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:33:23 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:33:28 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:33:30 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:33:36 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:36:09 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:36:14 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:36:18 ERROR CommandFactory:70 - Command not found
+2021-05-27 12:36:22 ERROR CommandFactory:70 - Command not found
+2021-05-28 12:08:50 ERROR ControllerHelper:41 - com.my.exception.ApplicationException: Incorrect data
+2021-05-28 12:09:09 ERROR ControllerHelper:41 - com.my.exception.ApplicationException: Incorrect data
+2021-05-28 12:09:22 ERROR ControllerHelper:41 - com.my.exception.ApplicationException: Incorrect data
+2021-05-28 12:10:51 ERROR CommandFactory:70 - Command not found
+2021-05-28 12:11:28 ERROR CommandFactory:70 - Command not found
+2021-05-28 12:12:35 ERROR CommandFactory:70 - Command not found
+2021-05-28 12:12:43 ERROR ControllerHelper:41 - com.my.exception.ApplicationException: Incorrect data
+2021-05-28 12:18:28 ERROR AcceptOrderCommand:35 - java.lang.IllegalArgumentException
+2021-05-28 12:18:28 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Incorrect data for date
+2021-05-28 12:25:02 ERROR OrderBookCommand:35 - com.my.exception.ApplicationException: Blocked user can`t order book
+2021-05-28 12:25:02 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Can't execute order book command
+2021-05-28 12:27:54 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Blocked user can`t order book
+2021-05-28 12:28:03 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Blocked user can`t order book
