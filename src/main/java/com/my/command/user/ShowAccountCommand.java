@@ -29,10 +29,7 @@ public class ShowAccountCommand extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         try {
-            if (user.getRole() == UserRole.LIBRARIAN) {
-                OrderDAO orderDAO = daoFactory.getOrderDAO();
-                request.setAttribute("orders", orderDAO.getAllOrders());
-            } else if (user.getRole() == UserRole.USER) {
+                if (user.getRole() == UserRole.USER) {
                 OrderDAO orderDAO = daoFactory.getOrderDAO();
                 List<Order> orderedBooks = orderDAO.getUserOrders(user.getId());
                 List<BookOnTicket> booksOnTicket = daoFactory.getBookOnTicketDAO().getAllBooksOnUserTicket(user.getId());

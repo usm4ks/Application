@@ -22,7 +22,7 @@ public class OrderBookService {
 
     private OrderBookService(){}
 
-    public void setDep(DAOFactory daoFactory,DBConnector dbConnector){
+    public void setUp(DAOFactory daoFactory,DBConnector dbConnector){
         this.daoFactory = daoFactory;
         this.dbConnector = dbConnector;
     }

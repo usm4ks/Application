@@ -1,6 +1,5 @@
 package com.my.command.book.edit;
 
-import com.my.ControllerHelper;
 import com.my.command.Command;
 import com.my.dao.DAOFactory;
 import com.my.entities.Book;
@@ -21,9 +20,12 @@ public class EditBookFormCommand extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ApplicationException {
         int bookId = Integer.parseInt(request.getParameter("bookId"));
-        Book book = null;
+        Book book;
         try {
             book = daoFactory.getBookDAO().getBookById(bookId);
+            if (book == null){
+                throw new ApplicationException("Book with this id not found",new Exception());
+            }
         } catch (ApplicationException e) {
             LOGGER.error(e);
             throw new ApplicationException("Can't show edit book form",e);

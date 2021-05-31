@@ -27,7 +27,8 @@ public class AcceptOrderCommand  extends Command {
         if (orderType.equals(OrderType.ON_TICKET.getType())) {
             try {
                 Date date = Date.valueOf(request.getParameter("until_date"));
-                OrderBookService.getInstance().acceptOrder(userId, bookId, date,OrderType.ON_TICKET);
+                OrderBookService orderBookService = OrderBookService.getInstance();
+                orderBookService.acceptOrder(userId, bookId, date,OrderType.ON_TICKET);
             } catch (ApplicationException e) {
                 LOGGER.error(e);
                 throw new ApplicationException("Can't accept order",e);

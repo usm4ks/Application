@@ -1,7 +1,9 @@
 package com.my.command;
 
-import com.my.command.book.*;
 import com.my.command.book.edit.*;
+import com.my.command.book.search.SearchBookCommand;
+import com.my.command.book.show.ShowAllBooksCommand;
+import com.my.command.book.sort.ShowSortedBooks;
 import com.my.command.order.AcceptOrderCommand;
 import com.my.command.user.authorization.LogOutCommand;
 import com.my.command.user.info.ShowAllUsersCommand;
@@ -18,7 +20,6 @@ import com.my.command.user.settings.BlockUserCommand;
 import com.my.command.user.settings.UnblockUserCommand;
 import com.my.command.user.settings.UsersSettingsCommand;
 import com.my.dao.DAOFactory;
-import com.my.exception.ApplicationException;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;

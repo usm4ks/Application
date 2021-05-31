@@ -1,5 +1,7 @@
 package com.my.entities;
 
+import java.util.Objects;
+
 public class Book {
     private int id;
     private String title;
@@ -54,5 +56,18 @@ public class Book {
 
     public int getAmount() {
         return amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id && year == book.year && amount == book.amount && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(publishingHouse, book.publishingHouse);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, author, publishingHouse, year, amount);
     }
 }

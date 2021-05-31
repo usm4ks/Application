@@ -10,7 +10,7 @@ com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long
 	at org.apache.tomcat.dbcp.dbcp2.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:136)
 	at com.my.dao.user.impl.UserDAOImpl.registrationUser(UserDAOImpl.java:46)
 	at com.my.command.user.authorization.RegistrationCommand.execute(RegistrationCommand.java:35)
-	at com.my.ControllerHelper.doPost(ControllerHelper.java:24)
+	at com.my.controller.ControllerHelper.doPost(ControllerHelper.java:24)
 	at com.my.controller.RegistrationController.doPost(RegistrationController.java:34)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
@@ -43,7 +43,7 @@ com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long
 2021-05-22 23:49:51 ERROR ControllerHelper:26 - doPost() error
 com.my.exception.ApplicationException: Can't execute registration command
 	at com.my.command.user.authorization.RegistrationCommand.execute(RegistrationCommand.java:41)
-	at com.my.ControllerHelper.doPost(ControllerHelper.java:24)
+	at com.my.controller.ControllerHelper.doPost(ControllerHelper.java:24)
 	at com.my.controller.RegistrationController.doPost(RegistrationController.java:34)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
@@ -85,7 +85,7 @@ java.sql.SQLException: Column 'type' not found.
 	at com.my.dao.order.impl.OrderDAOImpl.createOrder(OrderDAOImpl.java:131)
 	at com.my.dao.order.impl.OrderDAOImpl.getAllOrders(OrderDAOImpl.java:54)
 	at com.my.command.user.ShowAccountCommand.execute(ShowAccountCommand.java:34)
-	at com.my.ControllerHelper.doGet(ControllerHelper.java:39)
+	at com.my.controller.ControllerHelper.doGet(ControllerHelper.java:39)
 	at com.my.controller.AccountController.doGet(AccountController.java:40)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
@@ -130,7 +130,7 @@ java.sql.SQLException: Column 'type' not found.
 	at com.my.dao.order.impl.OrderDAOImpl.createOrder(OrderDAOImpl.java:131)
 	at com.my.dao.order.impl.OrderDAOImpl.getAllOrders(OrderDAOImpl.java:54)
 	at com.my.command.order.ShowAllOrdersCommand.execute(ShowAllOrdersCommand.java:21)
-	at com.my.ControllerHelper.doGet(ControllerHelper.java:39)
+	at com.my.controller.ControllerHelper.doGet(ControllerHelper.java:39)
 	at com.my.controller.AccountController.doGet(AccountController.java:40)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
@@ -175,7 +175,7 @@ java.sql.SQLException: Column 'type' not found.
 	at com.my.dao.order.impl.OrderDAOImpl.createOrder(OrderDAOImpl.java:132)
 	at com.my.dao.order.impl.OrderDAOImpl.getAllOrders(OrderDAOImpl.java:60)
 	at com.my.command.user.ShowAccountCommand.execute(ShowAccountCommand.java:34)
-	at com.my.ControllerHelper.doGet(ControllerHelper.java:39)
+	at com.my.controller.ControllerHelper.doGet(ControllerHelper.java:39)
 	at com.my.controller.AccountController.doGet(AccountController.java:40)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
@@ -219,7 +219,7 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.tomcat.dbcp.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122)
 	at com.my.dao.order.impl.OrderDAOImpl.getUserOrders(OrderDAOImpl.java:91)
 	at com.my.command.user.ShowAccountCommand.execute(ShowAccountCommand.java:37)
-	at com.my.ControllerHelper.doGet(ControllerHelper.java:39)
+	at com.my.controller.ControllerHelper.doGet(ControllerHelper.java:39)
 	at com.my.controller.AccountController.doGet(AccountController.java:40)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
@@ -262,7 +262,7 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.tomcat.dbcp.dbcp2.DelegatingStatement.executeQuery(DelegatingStatement.java:328)
 	at com.my.dao.order.impl.OrderDAOImpl.getAllOrders(OrderDAOImpl.java:55)
 	at com.my.command.user.ShowAccountCommand.execute(ShowAccountCommand.java:34)
-	at com.my.ControllerHelper.doGet(ControllerHelper.java:39)
+	at com.my.controller.ControllerHelper.doGet(ControllerHelper.java:39)
 	at com.my.controller.AccountController.doGet(AccountController.java:40)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
@@ -324,7 +324,7 @@ com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long
 	at org.apache.tomcat.dbcp.dbcp2.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:136)
 	at com.my.dao.user.impl.UserDAOImpl.registrationUser(UserDAOImpl.java:44)
 	at com.my.command.user.authorization.RegistrationCommand.execute(RegistrationCommand.java:35)
-	at com.my.ControllerHelper.doPost(ControllerHelper.java:24)
+	at com.my.controller.ControllerHelper.doPost(ControllerHelper.java:24)
 	at com.my.controller.RegistrationController.doPost(RegistrationController.java:34)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
@@ -383,3 +383,270 @@ com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long
 2021-05-28 12:25:02 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Can't execute order book command
 2021-05-28 12:27:54 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Blocked user can`t order book
 2021-05-28 12:28:03 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Blocked user can`t order book
+2021-05-28 18:37:48 ERROR AcceptOrderCommand:35 - java.lang.IllegalArgumentException
+2021-05-28 18:37:48 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Incorrect data for date
+2021-05-28 18:38:01 ERROR AcceptOrderCommand:35 - java.lang.IllegalArgumentException
+2021-05-28 18:38:01 ERROR ControllerHelper:26 - com.my.exception.ApplicationException: Incorrect data for date
+2021-05-29 00:53:09 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-29 00:53:21 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-29 01:10:12 ERROR AcceptOrderCommand:35 - java.lang.IllegalArgumentException
+2021-05-29 01:14:20 ERROR DBConnector:35 - getConnection() error
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:673)
+	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:313)
+	at javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:350)
+	at javax.naming.InitialContext.lookup(InitialContext.java:417)
+	at com.my.db.DBConnector.getConnection(DBConnector.java:32)
+	at com.my.command.order.AcceptOrderCommandTest.executeShouldReturnPath(AcceptOrderCommandTest.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:221)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54)
+2021-05-29 19:56:08 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-29 19:56:53 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-29 19:57:13 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-29 19:57:13 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-29 19:57:27 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-29 19:57:28 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-29 19:59:37 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-29 19:59:37 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-29 20:13:21 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-29 20:13:22 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 14:11:46 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 1007653873
+2021-05-30 14:12:29 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 14:14:27 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 2025864991
+2021-05-30 14:14:50 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 1558712965
+2021-05-30 14:16:00 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 828441346
+2021-05-30 14:18:23 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 1899073220
+2021-05-30 14:32:14 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 14:32:14 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 14:32:14 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-30 14:32:14 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 352359770
+2021-05-30 14:36:48 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-30 14:40:31 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 14:43:51 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 14:44:05 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 14:44:05 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 14:44:06 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-30 14:44:06 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 699780352
+2021-05-30 14:44:06 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-30 14:44:06 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 14:54:09 ERROR AddLibrarianCommand:35 - Mock for ApplicationException, hashCode: 828441346
+2021-05-30 15:10:22 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 1007653873
+2021-05-30 15:10:28 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 1007653873
+2021-05-30 15:14:22 ERROR LibrarianSettingsCommand:30 - Mock for ApplicationException, hashCode: 230835489
+2021-05-30 15:14:33 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 15:14:34 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 15:14:34 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-30 15:14:34 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 1166151249
+2021-05-30 15:14:34 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-30 15:14:34 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 15:14:34 ERROR AddLibrarianCommand:35 - Mock for ApplicationException, hashCode: 1188753216
+2021-05-30 15:14:34 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 640363654
+2021-05-30 15:14:34 ERROR LibrarianSettingsCommand:30 - Mock for ApplicationException, hashCode: 99451533
+2021-05-30 15:40:04 ERROR BlockUserCommand:36 - Mock for ApplicationException, hashCode: 828441346
+2021-05-30 15:44:39 ERROR BlockUserCommand:36 - Mock for ApplicationException, hashCode: 174573182
+2021-05-30 16:10:27 ERROR UnblockUserCommand:33 - Mock for ApplicationException, hashCode: 540585569
+2021-05-30 16:13:52 ERROR UsersSettingsCommand:30 - Mock for ApplicationException, hashCode: 2083117811
+2021-05-30 16:14:10 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 16:14:11 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 16:14:11 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-30 16:14:11 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 213193302
+2021-05-30 16:14:11 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-30 16:14:11 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 16:14:11 ERROR AddLibrarianCommand:35 - Mock for ApplicationException, hashCode: 640363654
+2021-05-30 16:14:11 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 84739718
+2021-05-30 16:14:11 ERROR LibrarianSettingsCommand:30 - Mock for ApplicationException, hashCode: 511473681
+2021-05-30 16:14:11 ERROR BlockUserCommand:36 - Mock for ApplicationException, hashCode: 439904756
+2021-05-30 16:14:11 ERROR UnblockUserCommand:33 - Mock for ApplicationException, hashCode: 2012846597
+2021-05-30 16:14:11 ERROR UsersSettingsCommand:30 - Mock for ApplicationException, hashCode: 1177377518
+2021-05-30 16:38:46 ERROR ShowAccountCommand:42 - Mock for ApplicationException, hashCode: 174573182
+2021-05-30 16:39:11 ERROR ShowAccountCommand:42 - Mock for ApplicationException, hashCode: 1899073220
+2021-05-30 16:39:37 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 16:39:37 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 16:39:38 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-30 16:39:38 ERROR ShowAccountCommand:42 - Mock for ApplicationException, hashCode: 19717364
+2021-05-30 16:39:38 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 1597655940
+2021-05-30 16:39:38 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-30 16:39:38 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 16:39:38 ERROR AddLibrarianCommand:35 - Mock for ApplicationException, hashCode: 2011986105
+2021-05-30 16:39:38 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 171497379
+2021-05-30 16:39:38 ERROR LibrarianSettingsCommand:30 - Mock for ApplicationException, hashCode: 1665404403
+2021-05-30 16:39:38 ERROR BlockUserCommand:36 - Mock for ApplicationException, hashCode: 1990451863
+2021-05-30 16:39:38 ERROR UnblockUserCommand:33 - Mock for ApplicationException, hashCode: 249155636
+2021-05-30 16:39:38 ERROR UsersSettingsCommand:30 - Mock for ApplicationException, hashCode: 140799417
+2021-05-30 18:32:34 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 18:32:35 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 18:32:35 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-30 18:32:35 ERROR ShowAccountCommand:42 - Mock for ApplicationException, hashCode: 1540270363
+2021-05-30 18:32:35 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 2619171
+2021-05-30 18:32:35 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-30 18:32:35 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 18:32:35 ERROR AddLibrarianCommand:35 - Mock for ApplicationException, hashCode: 439904756
+2021-05-30 18:32:35 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 2012846597
+2021-05-30 18:32:35 ERROR LibrarianSettingsCommand:30 - Mock for ApplicationException, hashCode: 988458918
+2021-05-30 18:32:35 ERROR BlockUserCommand:36 - Mock for ApplicationException, hashCode: 1295083508
+2021-05-30 18:32:35 ERROR UnblockUserCommand:33 - Mock for ApplicationException, hashCode: 1629604310
+2021-05-30 18:32:36 ERROR UsersSettingsCommand:30 - Mock for ApplicationException, hashCode: 926370398
+2021-05-30 18:49:57 ERROR DBConnector:35 - getConnection() error
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:673)
+	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:313)
+	at javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:350)
+	at javax.naming.InitialContext.lookup(InitialContext.java:417)
+	at com.my.db.DBConnector.getConnection(DBConnector.java:32)
+	at com.my.dao.book.impl.BookDAOImplTest.getAllBooksShouldThrowApplicationEx(BookDAOImplTest.java:18)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:221)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54)
+2021-05-30 19:27:53 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 19:27:54 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 19:27:54 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-30 19:27:54 ERROR ShowAccountCommand:42 - Mock for ApplicationException, hashCode: 2619171
+2021-05-30 19:27:54 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 1227074340
+2021-05-30 19:27:54 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-30 19:27:54 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 19:27:54 ERROR AddLibrarianCommand:35 - Mock for ApplicationException, hashCode: 2012846597
+2021-05-30 19:27:54 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 988458918
+2021-05-30 19:27:54 ERROR LibrarianSettingsCommand:30 - Mock for ApplicationException, hashCode: 1295083508
+2021-05-30 19:27:54 ERROR BlockUserCommand:36 - Mock for ApplicationException, hashCode: 1629604310
+2021-05-30 19:27:54 ERROR UnblockUserCommand:33 - Mock for ApplicationException, hashCode: 1320677379
+2021-05-30 19:27:54 ERROR UsersSettingsCommand:30 - Mock for ApplicationException, hashCode: 767010715
+2021-05-30 19:34:28 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 19:34:29 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 19:34:29 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-30 19:34:29 ERROR ShowAccountCommand:42 - Mock for ApplicationException, hashCode: 1728790703
+2021-05-30 19:34:29 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 1154002927
+2021-05-30 19:34:29 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-30 19:34:29 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 19:34:29 ERROR AddLibrarianCommand:35 - Mock for ApplicationException, hashCode: 1665404403
+2021-05-30 19:34:29 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 1990451863
+2021-05-30 19:34:29 ERROR LibrarianSettingsCommand:30 - Mock for ApplicationException, hashCode: 249155636
+2021-05-30 19:34:29 ERROR BlockUserCommand:36 - Mock for ApplicationException, hashCode: 142555199
+2021-05-30 19:34:29 ERROR UnblockUserCommand:33 - Mock for ApplicationException, hashCode: 246399377
+2021-05-30 19:34:29 ERROR UsersSettingsCommand:30 - Mock for ApplicationException, hashCode: 110431793
+2021-05-30 20:09:11 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-30 20:09:11 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-30 20:09:11 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-30 20:09:11 ERROR ShowAccountCommand:42 - Mock for ApplicationException, hashCode: 1728790703
+2021-05-30 20:09:11 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 1154002927
+2021-05-30 20:09:11 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-30 20:09:12 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-30 20:09:12 ERROR AddLibrarianCommand:35 - Mock for ApplicationException, hashCode: 1665404403
+2021-05-30 20:09:12 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 1990451863
+2021-05-30 20:09:12 ERROR LibrarianSettingsCommand:30 - Mock for ApplicationException, hashCode: 249155636
+2021-05-30 20:09:12 ERROR BlockUserCommand:36 - Mock for ApplicationException, hashCode: 142555199
+2021-05-30 20:09:12 ERROR UnblockUserCommand:33 - Mock for ApplicationException, hashCode: 246399377
+2021-05-30 20:09:12 ERROR UsersSettingsCommand:30 - Mock for ApplicationException, hashCode: 110431793
+2021-05-31 13:21:14 ERROR DBConnector:35 - getConnection() error
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:673)
+	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:313)
+	at javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:350)
+	at javax.naming.InitialContext.lookup(InitialContext.java:417)
+	at com.my.db.DBConnector.getConnection(DBConnector.java:32)
+	at com.my.dao.book.impl.BookDAOImpl.getBookById(BookDAOImpl.java:119)
+	at com.my.dao.book.impl.BookDAOImplTest.getBookByIdShouldReturnCorrectBook(BookDAOImplTest.java:16)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:221)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54)
+2021-05-31 13:23:56 ERROR DBConnector:35 - getConnection() error
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:673)
+	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:313)
+	at javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:350)
+	at javax.naming.InitialContext.lookup(InitialContext.java:417)
+	at com.my.db.DBConnector.getConnection(DBConnector.java:32)
+	at com.my.dao.book.impl.BookDAOImpl.getBookById(BookDAOImpl.java:119)
+	at com.my.dao.book.impl.BookDAOImplTest.getBookByIdShouldReturnCorrectBook(BookDAOImplTest.java:16)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:221)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54)
+2021-05-31 13:33:20 ERROR EditBookFormCommand:30 - com.my.exception.ApplicationException: Book with this id not found
+2021-05-31 13:33:21 ERROR AcceptOrderCommand:36 - java.lang.IllegalArgumentException
+2021-05-31 13:33:21 ERROR ShowAllOrdersCommand:30 - com.my.exception.ApplicationException: exception
+2021-05-31 13:33:21 ERROR ShowAccountCommand:42 - Mock for ApplicationException, hashCode: 1227074340
+2021-05-31 13:33:21 ERROR LogInCommand:30 - Mock for ApplicationException, hashCode: 2070529722
+2021-05-31 13:33:21 ERROR ShowAllUsersCommand:30 - com.my.exception.ApplicationException
+2021-05-31 13:33:21 ERROR ShowUserInfoCommand:34 - com.my.exception.ApplicationException
+2021-05-31 13:33:21 ERROR AddLibrarianCommand:35 - Mock for ApplicationException, hashCode: 988458918
+2021-05-31 13:33:21 ERROR DeleteLibrarianCommand:33 - Mock for ApplicationException, hashCode: 1295083508
+2021-05-31 13:33:21 ERROR LibrarianSettingsCommand:30 - Mock for ApplicationException, hashCode: 1629604310
+2021-05-31 13:33:21 ERROR BlockUserCommand:36 - Mock for ApplicationException, hashCode: 1320677379
+2021-05-31 13:33:21 ERROR UnblockUserCommand:33 - Mock for ApplicationException, hashCode: 1630521067
+2021-05-31 13:33:21 ERROR UsersSettingsCommand:30 - Mock for ApplicationException, hashCode: 192794887

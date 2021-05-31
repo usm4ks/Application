@@ -1,6 +1,5 @@
 package com.my.command.user.authorization;
 
-import com.my.ControllerHelper;
 import com.my.command.Command;
 import com.my.dao.DAOFactory;
 import com.my.dao.user.UserDAO;
@@ -24,7 +23,7 @@ public class LogInCommand extends Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         UserDAO userDAO = daoFactory.getUserDAO();
-        User user = null;
+        User user;
         try {
             user = userDAO.getUserByEmail(email);
         } catch (ApplicationException e) {

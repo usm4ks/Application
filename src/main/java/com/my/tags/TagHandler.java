@@ -2,9 +2,9 @@ package com.my.tags;
 
 import org.apache.log4j.Logger;
 
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
+import java.io.IOException;
 
 public class TagHandler extends TagSupport{
 
@@ -27,7 +27,7 @@ public class TagHandler extends TagSupport{
             } else{
                 out.print("no");
             }
-        }catch(Exception e){
+        }catch(IOException e){
             LOGGER.error("Tag exception",e);
         }
         return SKIP_BODY;
