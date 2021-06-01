@@ -27,6 +27,9 @@ public class AddNewBookCommand extends Command {
         book.setPublishingHouse(request.getParameter("publishing_house"));
         book.setYear(Integer.parseInt(request.getParameter("year")));
         book.setAmount(Integer.parseInt(request.getParameter("amount")));
+        if (daoFactory.getBookDAO().getBookByBookInfo(book.getTitle(), book.getAuthor(), book.getPublishingHouse(), book.getYear()) != null){
+            throw new ApplicationException("This book already exists",new Exception());
+        }
         try {
             daoFactory.getBookDAO().insertBook(book);
         } catch (ApplicationException e) {

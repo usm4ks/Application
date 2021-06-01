@@ -19,4 +19,5 @@ public interface BookDAO {
     void editBook(Book book) throws ApplicationException;
     void insertBook(Book book) throws ApplicationException;
     void deleteBook(int bookId) throws ApplicationException;
+    Book getBookByBookInfo(String title,String author,String publishingHouse, int year) throws ApplicationException;
 }

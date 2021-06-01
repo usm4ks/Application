@@ -13,8 +13,10 @@ import java.util.List;
 
 public class BookDAOImpl implements BookDAO {
 
-    private static final String SELECT_ALL_BOOKS = "SELECT * FROM Books LIMIT ?,5";
+
+    private static final String SELECT_ALL_BOOKS = "SELECT * FROM books LIMIT ?,5";
     private static final String SELECT_BOOKS_BY_TITLE_OR_AUTHOR = "SELECT * FROM books WHERE title LIKE ? OR author LIKE ?";
+    private static final String SELECT_BOOK_BY_BOOK_INFO = "SELECT * FROM books WHERE title=? AND author=? AND publishing_house=? AND year=?";
     private static final String SELECT_ALL_BOOKS_ORDER_BY_TITLE = "SELECT * FROM books ORDER BY title LIMIT ?,5";
     private static final String SELECT_ALL_BOOKS_ORDER_BY_AUTHOR = "SELECT * FROM books ORDER BY author LIMIT ?,5";
     private static final String SELECT_ALL_BOOKS_ORDER_BY_PUBLISHING = "SELECT * FROM books ORDER BY publishing_house LIMIT ?,5";
@@ -128,6 +130,31 @@ public class BookDAOImpl implements BookDAO {
             throw new ApplicationException("Can't get book by id",e);
 
         } finally {
+            dbConnector.close(rs,pst,con);
+        }
+        return book;
+    }
+
+    public Book getBookByBookInfo(String title,String author,String publishingHouse, int year) throws ApplicationException {
+        Book book = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try{
+            con = dbConnector.getConnection();
+            pst = con.prepareStatement(SELECT_BOOK_BY_BOOK_INFO);
+            pst.setString(1,title);
+            pst.setString(2,author);
+            pst.setString(3,publishingHouse);
+            pst.setInt(4,year);
+            rs = pst.executeQuery();
+            if (rs.next()){
+                book = InstanceService.buildBook(rs,false);
+            }
+        } catch (SQLException e) {
+            LOGGER.error("getBookByBookInfo() error",e);
+            throw new ApplicationException("Can't get book by id",e);
+        }finally {
             dbConnector.close(rs,pst,con);
         }
         return book;
