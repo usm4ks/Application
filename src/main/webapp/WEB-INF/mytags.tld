@@ -8,14 +8,18 @@
     <tlib-version>1.0</tlib-version>
     <jsp-version>1.2</jsp-version>
     <short-name>simple</short-name>
-    <uri>http://tomcat.apache.org/example-taglib</uri>
+    <uri>http://tomcat.apache.org/taglib</uri>
 
     <tag>
         <name>blockStatus</name>
-        <tag-class>com.my.tags.TagHandler</tag-class>
+        <tag-class>com.my.tags.BlockStatus</tag-class>
         <attribute>
             <name>status</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+    </tag>
+    <tag>
+        <name>dateValue</name>
+        <tag-class>com.my.tags.DateValue</tag-class>
     </tag>
 </taglib>

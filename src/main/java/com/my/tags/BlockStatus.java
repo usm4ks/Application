@@ -6,15 +6,13 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
-public class TagHandler extends TagSupport{
+public class BlockStatus extends TagSupport{
 
-    private static final Logger LOGGER = Logger.getLogger(TagHandler.class);
+    private static final Logger LOGGER = Logger.getLogger(BlockStatus.class);
 
     private boolean status;
 
-    public void setStatus(boolean status){
-        this.status = status;
-    }
+    public void setStatus(boolean status){ this.status = status; }
 
 
 

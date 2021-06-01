@@ -2,6 +2,7 @@
 <%@taglib prefix="h" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="m" uri="/WEB-INF/mytags.tld" %>
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages"/>
 <html>
@@ -31,7 +32,7 @@
                 <c:choose>
                     <c:when test="${order.type.type == 'on_ticket'}">
                         <form class="d-flex" action="book_list?command=accept_order_book&bookId=${order.book.id}&userId=${order.user.id}&type=${order.type.type}" method="post">
-                            <input id="start" name="until_date" type="date">
+                            <input id="start" name="until_date" value="<m:dateValue/>" type="date">
                             <button class="btn btn-outline-secondary" type="submit"><fmt:message key="accept"/></button>
                         </form>
                     </c:when>
