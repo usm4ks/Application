@@ -2,9 +2,9 @@ package com.my.command.user.authorization;
 
 import com.my.command.Command;
 import com.my.dao.DAOFactory;
-import com.my.dao.user.UserDAO;
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,15 +22,14 @@ public class LogInCommand extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ApplicationException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        UserDAO userDAO = daoFactory.getUserDAO();
         User user;
         try {
-            user = userDAO.getUserByEmail(email);
+            user = daoFactory.getUserDAO().getUserByEmail(email);
         } catch (ApplicationException e) {
             LOGGER.error(e);
             throw new ApplicationException("Can't execute log in command",e);
         }
-        if (user != null && user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(DigestUtils.md5Hex(password))) {
             request.getSession().setAttribute("user",user);
             return "book_list?command=show_all_books&page=1";
         }

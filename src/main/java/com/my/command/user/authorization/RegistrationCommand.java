@@ -6,6 +6,7 @@ import com.my.dao.user.UserDAO;
 import com.my.entities.User;
 import com.my.enums.UserRole;
 import com.my.exception.ApplicationException;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +25,11 @@ public class RegistrationCommand extends Command {
         UserDAO userDAO = daoFactory.getUserDAO();
         User user = new User();
         user.setEmail(request.getParameter("email"));
-        user.setPassword(request.getParameter("password"));
-        if (user.getPassword().length() < 6 || user.getPassword().length() > 18){
+        String password = request.getParameter("password");
+        if (password.length() < 8 || password.length() > 18){
             throw new ApplicationException("Incorrect input data for password (need 6-18 symbols)", new Exception());
         }
+        user.setPassword(DigestUtils.md5Hex(password));
         user.setFirstName(request.getParameter("firstName"));
         user.setLastName(request.getParameter("lastName"));
         user.setRole(UserRole.USER);

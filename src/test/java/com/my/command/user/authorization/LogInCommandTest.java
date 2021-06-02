@@ -4,6 +4,7 @@ import com.my.dao.DAOFactory;
 import com.my.dao.user.impl.UserDAOImpl;
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -42,7 +43,7 @@ public class LogInCommandTest {
         when(request.getSession()).thenReturn(mock(HttpSession.class));
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         User user = new User();
-        user.setPassword("password");
+        user.setPassword(DigestUtils.md5Hex("password"));
         when(daoFactory.getUserDAO().getUserByEmail(anyString())).thenReturn(user);
         Assert.assertEquals("book_list?command=show_all_books&page=1",logInCommand.execute(request,response));
     }
