@@ -4,7 +4,7 @@ import com.my.dao.book.BookOnTicketDAO;
 import com.my.db.DBConnector;
 import com.my.entities.BookOnTicket;
 import com.my.exception.ApplicationException;
-import com.my.services.InstanceService;
+import com.my.util.InstanceBuilder;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -143,8 +143,8 @@ public class BookOnTicketDAOImpl implements BookOnTicketDAO {
 
     private BookOnTicket createBookOnTicket(ResultSet rs) throws SQLException {
         BookOnTicket bookOnTicket = new BookOnTicket();
-        bookOnTicket.setBook(InstanceService.buildBook(rs,true));
-        bookOnTicket.setUser(InstanceService.buildUser(rs,true));
+        bookOnTicket.setBook(InstanceBuilder.buildBook(rs,true));
+        bookOnTicket.setUser(InstanceBuilder.buildUser(rs,true));
         bookOnTicket.setUntilDate(rs.getDate("until_date"));
         bookOnTicket.setFine(rs.getInt("fine"));
         return bookOnTicket;

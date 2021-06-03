@@ -15,7 +15,7 @@ public interface BookDAO {
     List<Book> searchBook(String search) throws ApplicationException;
     List<Book> getSortedBooks(int page,String type) throws ApplicationException;
     Book getBookById(int id) throws ApplicationException;
-    void decrementBookAmountById(Connection connection, int id) throws SQLException;
+    void changeBookAmountById(Connection connection, int id,int amount) throws SQLException;
     void editBook(Book book) throws ApplicationException;
     void insertBook(Book book) throws ApplicationException;
     void deleteBook(int bookId) throws ApplicationException;

@@ -1,6 +1,6 @@
 package com.my.command.book.edit;
 
-import com.my.controller.ControllerHelper;
+import com.my.util.ControllerHelper;
 import com.my.command.Command;
 import com.my.dao.DAOFactory;
 import com.my.entities.Book;

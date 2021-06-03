@@ -1,4 +1,4 @@
-package com.my.services;
+package com.my.util;
 
 import com.my.entities.Book;
 import com.my.entities.User;
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 
-public class InstanceService {
+public class InstanceBuilder {
 
 
     public static Book buildBook(ResultSet rs,Boolean isComplex) throws SQLException {

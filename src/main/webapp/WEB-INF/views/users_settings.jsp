@@ -23,9 +23,9 @@
 <table style="" class="table">
     <thead>
     <tr>
-        <th scope="col"><fmt:message key="email"/></th>
         <th scope="col"><fmt:message key="f_name"/></th>
         <th scope="col"><fmt:message key="l_name"/></th>
+        <th scope="col"><fmt:message key="email"/></th>
         <th scope="col"></th>
     </tr>
     </thead>

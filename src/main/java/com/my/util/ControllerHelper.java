@@ -1,4 +1,4 @@
-package com.my.controller;
+package com.my.util;
 
 import com.my.command.Command;
 import com.my.command.CommandFactory;

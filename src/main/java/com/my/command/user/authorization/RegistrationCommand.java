@@ -27,7 +27,7 @@ public class RegistrationCommand extends Command {
         user.setEmail(request.getParameter("email"));
         String password = request.getParameter("password");
         if (password.length() < 8 || password.length() > 18){
-            throw new ApplicationException("Incorrect input data for password (need 6-18 symbols)", new Exception());
+            throw new ApplicationException("Incorrect input data for password (need 8-18 symbols)", new Exception());
         }
         user.setPassword(DigestUtils.md5Hex(password));
         user.setFirstName(request.getParameter("firstName"));

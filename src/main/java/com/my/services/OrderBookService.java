@@ -42,7 +42,7 @@ public class OrderBookService {
         try {
             connection.setAutoCommit(false);
             orderDAO.addBookToOrder(connection,userId,bookId,orderType);
-            bookDAO.decrementBookAmountById(connection,bookId);
+            bookDAO.changeBookAmountById(connection,bookId,-1);
             connection.commit();
         } catch (SQLException e) {
             LOGGER.error("orderBook() error",e);
