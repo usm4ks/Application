@@ -11,6 +11,7 @@ import java.sql.*;
 public class DBConnector {
 
     private static final Logger LOGGER = Logger.getLogger(DBConnector.class);
+    private final String closeError = "close() error";
 
 
     private DBConnector(){
@@ -45,7 +46,7 @@ public class DBConnector {
             if (con != null)
                 con.close();
         } catch (SQLException e) {
-            LOGGER.error("close() error",e);
+            LOGGER.error(closeError,e);
         }
 
     }
@@ -55,7 +56,7 @@ public class DBConnector {
                 rs.close();
             close(pst, con);
         } catch (SQLException e) {
-            LOGGER.error("close() error",e);
+            LOGGER.error(closeError,e);
         }
 
     }
@@ -66,7 +67,7 @@ public class DBConnector {
             if (con != null)
                 con.close();
         } catch (SQLException e) {
-            LOGGER.error("close() error",e);
+            LOGGER.error(closeError,e);
         }
     }
     public void close(ResultSet rs, Statement st, Connection con) {
@@ -75,7 +76,7 @@ public class DBConnector {
                 rs.close();
             close(st, con);
         } catch (SQLException e) {
-            LOGGER.error("close() error",e);
+            LOGGER.error(closeError,e);
         }
 
     }

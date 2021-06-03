@@ -3,7 +3,6 @@ package com.my.controller;
 import com.my.command.Command;
 import com.my.command.CommandConstants;
 import com.my.command.CommandFactory;
-import com.my.db.DBConnector;
 import com.my.exception.ApplicationException;
 import com.my.util.ControllerHelper;
 import org.apache.log4j.Logger;
@@ -21,8 +20,8 @@ import java.util.Set;
 public class RegistrationController extends HttpServlet {
     private CommandFactory commandFactory;
     private static final String COMMAND = "command";
-    Set<String> availableCommands = new HashSet<>();
-    private static final Logger LOGGER = Logger.getLogger(DBConnector.class);
+    private final Set<String> availableCommands = new HashSet<>();
+    private static final Logger LOGGER = Logger.getLogger(RegistrationController.class);
 
     @Override
     public void init(){

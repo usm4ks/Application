@@ -37,7 +37,7 @@ public class ShowAllBooksCommand extends Command {
         try {
             List<Book> bookList = bookDAO.getAllBooks(page);
             request.setAttribute("book_list", bookList);
-            if (bookDAO.getAllBooks(page+1).size() > 0){
+            if (!bookDAO.getAllBooks(page+1).isEmpty()){
                 request.setAttribute("next",String.format("book_list?command=show_all_books&page=%d", page+1));
             }
         } catch (ApplicationException e) {

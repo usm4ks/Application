@@ -3,14 +3,14 @@ package com.my.enums;
 public enum UserRole {
     ADMIN("admin"),LIBRARIAN("librarian"),USER("user");
 
-    private String role_name;
+    private final String roleName;
 
     UserRole(String role) {
-        this.role_name = role;
+        this.roleName = role;
     }
 
     public String getRoleName() {
-        return role_name;
+        return roleName;
     }
 
 

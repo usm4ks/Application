@@ -28,7 +28,7 @@ public class SearchBookCommand extends Command {
         String s = request.getParameter("search");
         try {
             List<Book> books = bookDAO.searchBook(s);
-            if (books.size() != 0) {
+            if (!books.isEmpty()) {
                 request.setAttribute("book_list", books);
             } else {
                 request.setAttribute("search_result", "book_is_not_found");

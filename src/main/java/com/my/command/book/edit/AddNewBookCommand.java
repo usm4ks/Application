@@ -1,6 +1,5 @@
 package com.my.command.book.edit;
 
-import com.my.util.ControllerHelper;
 import com.my.command.Command;
 import com.my.dao.DAOFactory;
 import com.my.entities.Book;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AddNewBookCommand extends Command {
 
-    private static final Logger LOGGER = Logger.getLogger(ControllerHelper.class);
+    private static final Logger LOGGER = Logger.getLogger(AddNewBookCommand.class);
 
 
     public AddNewBookCommand(DAOFactory daoFactory) {

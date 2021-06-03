@@ -2,9 +2,10 @@ package com.my.entities;
 
 import com.my.enums.UserRole;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
     private int id;
     private String email;
     private String password;

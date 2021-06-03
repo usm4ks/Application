@@ -2,8 +2,8 @@ package com.my.exception;
 
 public class ApplicationException extends Exception{
 
-    private String message;
-    private Exception exception;
+    private final String message;
+    private final Exception exception;
 
     @Override
     public String getMessage() {

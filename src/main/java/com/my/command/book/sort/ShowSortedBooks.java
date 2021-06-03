@@ -38,7 +38,7 @@ public class ShowSortedBooks extends Command {
         try {
             List<Book> bookList = bookDAO.getSortedBooks(page,sortBy);
             request.setAttribute("book_list", bookList);
-            if (bookDAO.getSortedBooks(page+1,sortBy).size() > 0){
+            if (!bookDAO.getSortedBooks(page+1,sortBy).isEmpty()){
                 request.setAttribute("next",String.format("book_list?command=show_sorted_books&sort_by=%s&page=%d",sortBy ,page+1));
             }
         } catch (ApplicationException e) {

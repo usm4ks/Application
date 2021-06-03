@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public abstract class Command {
-    public DAOFactory daoFactory;
+    public final DAOFactory daoFactory;
 
-    public Command(DAOFactory daoFactory){
+    protected Command(DAOFactory daoFactory){
         this.daoFactory = daoFactory;
     }
 

@@ -22,11 +22,11 @@ public class BookDAOImpl implements BookDAO {
     private static final String SELECT_ALL_BOOKS_ORDER_BY_AUTHOR = "SELECT * FROM books ORDER BY author LIMIT ?,5";
     private static final String SELECT_ALL_BOOKS_ORDER_BY_PUBLISHING = "SELECT * FROM books ORDER BY publishing_house LIMIT ?,5";
     private static final String SELECT_ALL_BOOKS_ORDER_BY_YEAR = "SELECT * FROM books ORDER BY year DESC LIMIT ?,5";
-    private final static String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE id=?";
-    private final static String UPDATE_BOOKS_SET_AMOUNT_DECREMENT_BY_ID = "UPDATE books SET amount=?+amount WHERE id=?";
-    private final static String UPDATE_BOOK_VALUES = "UPDATE books SET title=?, author=?,publishing_house=?,year=?,amount=? WHERE id=?";
-    private final static String INSERT_NEW_BOOK = "INSERT INTO books(title, author, publishing_house, year, amount) VALUES (?,?,?,?,?)";
-    private final static String DELETE_BOOK = "DELETE FROM books WHERE id=?";
+    private static final  String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE id=?";
+    private static final  String UPDATE_BOOKS_SET_AMOUNT_DECREMENT_BY_ID = "UPDATE books SET amount=?+amount WHERE id=?";
+    private static final  String UPDATE_BOOK_VALUES = "UPDATE books SET title=?, author=?,publishing_house=?,year=?,amount=? WHERE id=?";
+    private static final  String INSERT_NEW_BOOK = "INSERT INTO books(title, author, publishing_house, year, amount) VALUES (?,?,?,?,?)";
+    private static final  String DELETE_BOOK = "DELETE FROM books WHERE id=?";
 
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
 
@@ -65,7 +65,6 @@ public class BookDAOImpl implements BookDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("getAllBooks() error",e);
-            System.out.println("SQLException - getAllBooks");
             throw new ApplicationException("Can't get all books",e);
         } finally {
             dbConnector.close(rs,pst,con);
@@ -95,7 +94,6 @@ public class BookDAOImpl implements BookDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("getSortedBooks() error",e);
-            System.out.println("SQLException - getAllBooks");
             throw new ApplicationException("Can't get sorted books",e);
         } finally {
             dbConnector.close(rs,pst,con);

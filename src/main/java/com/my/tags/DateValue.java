@@ -12,10 +12,11 @@ import java.util.Date;
 
 public class DateValue extends TagSupport {
 
-    private static final Logger LOGGER = Logger.getLogger(BlockStatus.class);
-    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final Logger LOGGER = Logger.getLogger(DateValue.class);
+    private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
+    @Override
     public int doStartTag() {
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();

@@ -10,10 +10,11 @@ import java.util.Locale;
 
 public class InstanceBuilder {
 
+    private InstanceBuilder() {}
 
-    public static Book buildBook(ResultSet rs,Boolean isComplex) throws SQLException {
+    public static Book buildBook(ResultSet rs, Boolean isComplex) throws SQLException {
         Book book = new Book();
-        if (isComplex){
+        if (Boolean.TRUE.equals(isComplex)){
             book.setId(rs.getInt("book_id"));
         }else {
             book.setId(rs.getInt("id"));
@@ -28,7 +29,7 @@ public class InstanceBuilder {
 
     public static User buildUser(ResultSet rs,Boolean isComplex) throws SQLException {
         User user = new User();
-        if (isComplex){
+        if (Boolean.TRUE.equals(isComplex)){
             user.setId(rs.getInt("user_id"));
         } else {
             user.setId(rs.getInt("id"));

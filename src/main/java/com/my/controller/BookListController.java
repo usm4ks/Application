@@ -17,7 +17,7 @@ import java.util.Set;
 public class BookListController extends HttpServlet {
 
     private CommandFactory commandFactory;
-    Set<String> availableCommands = new HashSet<>();
+    private final Set<String> availableCommands = new HashSet<>();
 
     @Override
     public void init(){

@@ -20,15 +20,12 @@ public class DAOFactory {
     private final BookOnTicketDAO  bookOnTicketDAO;
     private final OrderDAO orderDAO;
 
-    {
+    public DAOFactory(DBConnector dbConnector){
         bookDAO = new BookDAOImpl();
         userDAO = new UserDAOImpl();
         bookInHallDAO = new BookInHallDAOImpl();
         bookOnTicketDAO = new BookOnTicketDAOImpl();
         orderDAO = new OrderDAOImpl();
-    }
-
-    public DAOFactory(DBConnector dbConnector){
         userDAO.setDBConnector(dbConnector);
         bookDAO.setDBConnector(dbConnector);
         bookInHallDAO.setDBConnector(dbConnector);

@@ -16,6 +16,7 @@ public class ControllerHelper {
     private static final String COMMAND = "command";
     private static final Logger LOGGER = Logger.getLogger(ControllerHelper.class);
 
+    private ControllerHelper() {}
 
     public static void doPost(HttpServletRequest req, HttpServletResponse resp, CommandFactory commandFactory) throws IOException, ServletException {
         String stringCommand = req.getParameter(COMMAND);

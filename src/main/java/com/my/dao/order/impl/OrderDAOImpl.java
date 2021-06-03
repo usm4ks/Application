@@ -16,10 +16,10 @@ import java.util.Locale;
 
 public class OrderDAOImpl implements OrderDAO {
 
-    private final static String SELECT_ALL_FROM_ORDERS = "SELECT user_id,email,password,first_name,last_name,role,blocked,book_id,title,author,publishing_house,year,amount,type FROM orders JOIN books b ON b.id = orders.book_id JOIN users u ON orders.user_id = u.id";
-    private final static String INSERT_ORDER = "INSERT INTO orders(user_id, book_id, type) VALUES (?,?,?)";
-    private final static String SELECT_ALL_ORDERED_BOOKS_BY_USER_ID = "SELECT user_id,email,password,first_name,last_name,role,blocked,book_id,title,author,publishing_house,year,amount,type FROM orders JOIN books b ON b.id = orders.book_id JOIN users u ON orders.user_id = u.id WHERE user_id=?";
-    private final static String SELECT_ORDERED_BOOK_BY_USER_ID = "SELECT user_id,email,password,first_name,last_name," +
+    private static final String SELECT_ALL_FROM_ORDERS = "SELECT user_id,email,password,first_name,last_name,role,blocked,book_id,title,author,publishing_house,year,amount,type FROM orders JOIN books b ON b.id = orders.book_id JOIN users u ON orders.user_id = u.id";
+    private static final String INSERT_ORDER = "INSERT INTO orders(user_id, book_id, type) VALUES (?,?,?)";
+    private static final String SELECT_ALL_ORDERED_BOOKS_BY_USER_ID = "SELECT user_id,email,password,first_name,last_name,role,blocked,book_id,title,author,publishing_house,year,amount,type FROM orders JOIN books b ON b.id = orders.book_id JOIN users u ON orders.user_id = u.id WHERE user_id=?";
+    private static final String SELECT_ORDERED_BOOK_BY_USER_ID = "SELECT user_id,email,password,first_name,last_name," +
             "role,blocked,book_id,title,author,publishing_house,year,amount,type " +
             "FROM orders JOIN books b ON b.id = orders.book_id " +
             "JOIN users u ON orders.user_id = u.id WHERE user_id=? AND book_id=?";

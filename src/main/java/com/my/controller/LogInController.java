@@ -16,7 +16,7 @@ import java.util.Set;
 @WebServlet("/log_in")
 public class LogInController extends HttpServlet {
     private CommandFactory commandFactory;
-    Set<String> availableCommands = new HashSet<>();
+    private final Set<String> availableCommands = new HashSet<>();
 
     @Override
     public void init(){

@@ -21,8 +21,4 @@ public class ContextListener implements ServletContextListener {
         ServletContext ctx = sce.getServletContext();
         ctx.setAttribute("commandFactory",commandFactory);
     }
-
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-    }
 }

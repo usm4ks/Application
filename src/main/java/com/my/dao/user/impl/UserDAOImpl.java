@@ -13,12 +13,12 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
-    private final static String INSERT_NEW_USER = "INSERT INTO users(email, password, first_name, last_name) VALUES (?,?,?,?)";
-    private final static String SELECT_ALL_USERS_BY_EMAIL = "SELECT * FROM users WHERE email=?";
-    private final static String SELECT_USERS_BY_ID = "SELECT * FROM users WHERE id=?";
-    private final static String SELECT_ALL_USERS_BY_ROLE = "SELECT * FROM users WHERE role=?";
-    private final static String CHANGE_BLOCK_STATUS_USER_BY_ID = "UPDATE users SET blocked=? WHERE id=?";
-    private final static String CHANGE_ROLE_USER_BY_ID = "UPDATE users SET role=? WHERE id=?";
+    private static final String INSERT_NEW_USER = "INSERT INTO users(email, password, first_name, last_name) VALUES (?,?,?,?)";
+    private static final String SELECT_ALL_USERS_BY_EMAIL = "SELECT * FROM users WHERE email=?";
+    private static final String SELECT_USERS_BY_ID = "SELECT * FROM users WHERE id=?";
+    private static final String SELECT_ALL_USERS_BY_ROLE = "SELECT * FROM users WHERE role=?";
+    private static final String CHANGE_BLOCK_STATUS_USER_BY_ID = "UPDATE users SET blocked=? WHERE id=?";
+    private static final String CHANGE_ROLE_USER_BY_ID = "UPDATE users SET role=? WHERE id=?";
 
     private static final Logger LOGGER = Logger.getLogger(UserDAOImpl.class);
 

@@ -27,7 +27,7 @@ public class DeleteBookCommand extends Command {
             Book book = daoFactory.getBookDAO().getBookById(bookId);
             List<BookInHall> bookInHallList = daoFactory.getBookInHallDAO().getBookInHallByBookId(bookId);
             List<BookOnTicket> bookOnTicketList = daoFactory.getBookOnTicketDAO().getBookOnTicketByBookId(bookId);
-            if (book != null && bookOnTicketList.size() == 0 && bookInHallList.size() == 0) {
+            if (book != null && bookOnTicketList.isEmpty() && bookInHallList.isEmpty()) {
                 daoFactory.getBookDAO().deleteBook(bookId);
             }
         } catch (ApplicationException e) {
