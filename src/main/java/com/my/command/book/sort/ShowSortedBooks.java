@@ -5,6 +5,7 @@ import com.my.dao.DAOFactory;
 import com.my.dao.book.BookDAO;
 import com.my.entities.Book;
 import com.my.exception.ApplicationException;
+import com.my.util.PaginationHelper;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,15 +22,7 @@ public class ShowSortedBooks extends Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ApplicationException {
-        String pageNum = request.getParameter("page");
-        int page = 1;
-        if (pageNum != null){
-            try {
-                page = Integer.parseInt(pageNum);
-            }catch (NumberFormatException exception){
-                throw new ApplicationException("Incorrect data",exception);
-            }
-        }
+        int page = PaginationHelper.getPage(request);
         String sortBy = request.getParameter("sort_by");
         BookDAO bookDAO = daoFactory.getBookDAO();
         if (page > 1){

@@ -53,11 +53,7 @@ public class OrderBookService {
             }
             throw new ApplicationException("Can't order book",e);
         }finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("connection.close() error",e);
-            }
+            dbConnector.close(connection);
         }
 
     }
@@ -82,13 +78,7 @@ public class OrderBookService {
             }
             throw new ApplicationException("Can't accept order",e);
         }finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("connection.close() error",e);
-            }
+            dbConnector.close(connection);
         }
     }
-
-
 }

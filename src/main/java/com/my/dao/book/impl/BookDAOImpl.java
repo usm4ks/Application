@@ -22,11 +22,17 @@ public class BookDAOImpl implements BookDAO {
     private static final String SELECT_ALL_BOOKS_ORDER_BY_AUTHOR = "SELECT * FROM books ORDER BY author LIMIT ?,5";
     private static final String SELECT_ALL_BOOKS_ORDER_BY_PUBLISHING = "SELECT * FROM books ORDER BY publishing_house LIMIT ?,5";
     private static final String SELECT_ALL_BOOKS_ORDER_BY_YEAR = "SELECT * FROM books ORDER BY year DESC LIMIT ?,5";
-    private static final  String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE id=?";
-    private static final  String UPDATE_BOOKS_SET_AMOUNT_DECREMENT_BY_ID = "UPDATE books SET amount=?+amount WHERE id=?";
-    private static final  String UPDATE_BOOK_VALUES = "UPDATE books SET title=?, author=?,publishing_house=?,year=?,amount=? WHERE id=?";
-    private static final  String INSERT_NEW_BOOK = "INSERT INTO books(title, author, publishing_house, year, amount) VALUES (?,?,?,?,?)";
-    private static final  String DELETE_BOOK = "DELETE FROM books WHERE id=?";
+    private static final String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE id=?";
+    private static final String UPDATE_BOOKS_SET_AMOUNT_DECREMENT_BY_ID = "UPDATE books SET amount=?+amount WHERE id=?";
+    private static final String UPDATE_BOOK_VALUES = "UPDATE books SET title=?, author=?,publishing_house=?,year=?,amount=? WHERE id=?";
+    private static final String INSERT_NEW_BOOK = "INSERT INTO books(title, author, publishing_house, year, amount) VALUES (?,?,?,?,?)";
+    private static final String DELETE_BOOK = "DELETE FROM books WHERE id=?";
+
+    private static final String TITLE = "title";
+    private static final String AUTHOR = "author";
+    private static final String PUBLISHING_HOUSE = "publishing_house";
+    private static final String YEAR = "year";
+
 
     private static final Logger LOGGER = Logger.getLogger(BookDAOImpl.class);
 
@@ -38,12 +44,11 @@ public class BookDAOImpl implements BookDAO {
     }
 
 
-
-    /*
-    This method return 5 books for every page
-    @param page - number of page
-    if  page <= 0 - methods returns all books from data base
-    @return list of books
+    /**
+     * This method return 5 books for every page
+     * @param page - number of page
+     * if  page <= 0 - methods returns all books from data base
+     * @return list of books
      */
     @Override
     public List<Book> getAllBooks(int page) throws ApplicationException {
@@ -72,12 +77,12 @@ public class BookDAOImpl implements BookDAO {
         return  bookList;
     }
 
-    /*
-   This method return 5 books for every page from sorted data
-   @param page - number of page
-   if  page <= 0 - methods returns all sorted books from data base
-   @return list of books
-    */
+    /**
+     * This method return 5 books for every page from sorted data
+     * @param page - number of page
+     * if  page <= 0 - methods returns all sorted books from data base
+     * @return list of books
+     */
     @Override
     public List<Book> getSortedBooks(int page, String type) throws ApplicationException {
         List<Book> bookList = new ArrayList<>();
@@ -175,11 +180,11 @@ public class BookDAOImpl implements BookDAO {
         return book;
     }
 
-    /*
-    Increment and Decrement operations
-    @param id - id of book that amounts changing
-    @param amount - how many times do Increment and Decrement operations
-    if amount is positive number - do increment, negative - decrement
+    /**
+     * Increment and Decrement operations
+     * @param id     - id of book that amounts changing
+     * @param amount - how many times do Increment and Decrement operations
+     * if amount is positive number - do increment, negative - decrement
      */
     @Override
     public void changeBookAmountById(Connection connection, int id,int amount) throws SQLException  {
@@ -264,10 +269,10 @@ public class BookDAOImpl implements BookDAO {
 
     private String getTypeOfSorter(String type){
         switch (type){
-            case "title" : return SELECT_ALL_BOOKS_ORDER_BY_TITLE;
-            case "author" : return SELECT_ALL_BOOKS_ORDER_BY_AUTHOR;
-            case "publishing_house" : return SELECT_ALL_BOOKS_ORDER_BY_PUBLISHING;
-            case "year" : return SELECT_ALL_BOOKS_ORDER_BY_YEAR;
+            case TITLE: return SELECT_ALL_BOOKS_ORDER_BY_TITLE;
+            case AUTHOR: return SELECT_ALL_BOOKS_ORDER_BY_AUTHOR;
+            case PUBLISHING_HOUSE: return SELECT_ALL_BOOKS_ORDER_BY_PUBLISHING;
+            case YEAR: return SELECT_ALL_BOOKS_ORDER_BY_YEAR;
             default: return null;
         }
     }

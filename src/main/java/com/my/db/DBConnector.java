@@ -43,8 +43,7 @@ public class DBConnector {
         try {
             if (pst != null)
                 pst.close();
-            if (con != null)
-                con.close();
+                close(con);
         } catch (SQLException e) {
             LOGGER.error(CLOSE_ERROR,e);
         }
@@ -64,8 +63,7 @@ public class DBConnector {
         try {
             if (st != null)
                 st.close();
-            if (con != null)
-                con.close();
+            close(con);
         } catch (SQLException e) {
             LOGGER.error(CLOSE_ERROR,e);
         }
@@ -78,6 +76,13 @@ public class DBConnector {
         } catch (SQLException e) {
             LOGGER.error(CLOSE_ERROR,e);
         }
+    }
 
+    public void close(Connection con){
+        try {
+            con.close();
+        } catch (SQLException e) {
+            LOGGER.error(CLOSE_ERROR,e);
+        }
     }
 }

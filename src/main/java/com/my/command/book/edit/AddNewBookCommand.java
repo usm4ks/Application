@@ -13,10 +13,10 @@ public class AddNewBookCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(AddNewBookCommand.class);
 
-
     public AddNewBookCommand(DAOFactory daoFactory) {
         super(daoFactory);
     }
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ApplicationException {
