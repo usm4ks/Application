@@ -5,7 +5,8 @@
 <%@ taglib prefix="m" uri="/WEB-INF/mytags.tld" %>
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages"/>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Order list</title>
 </head>
