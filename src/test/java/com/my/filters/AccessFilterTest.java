@@ -43,10 +43,10 @@ public class AccessFilterTest {
         when(user.getRole()).thenReturn(UserRole.USER);
         when(request.getSession().getAttribute("user")).thenReturn(user);
         RequestDispatcher requestDispatcher = mock(RequestDispatcher.class);
-        when(request.getRequestDispatcher("book_list?command=show_all_books")).thenReturn(requestDispatcher);
+        when(request.getRequestDispatcher("/WEB-INF/views/fail.jsp")).thenReturn(requestDispatcher);
         accessFilter.init(mock(FilterConfig.class));
         accessFilter.doFilter(request, response, filterChain);
-        verify(request.getRequestDispatcher("book_list?command=show_all_books"), times(1)).forward(request, response);
+        verify(request.getRequestDispatcher("/WEB-INF/views/fail.jsp"), times(1)).forward(request, response);
     }
 
     @Test
@@ -60,7 +60,6 @@ public class AccessFilterTest {
         User user = mock(User.class);
         when(user.getRole()).thenReturn(UserRole.ADMIN);
         when(request.getSession().getAttribute("user")).thenReturn(user);
-        RequestDispatcher requestDispatcher = mock(RequestDispatcher.class);
         accessFilter.init(mock(FilterConfig.class));
         accessFilter.doFilter(request, response, filterChain);
         verify(filterChain, times(1)).doFilter(request,response);

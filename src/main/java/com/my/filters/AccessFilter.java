@@ -55,7 +55,7 @@ public class AccessFilter implements Filter {
             request.getRequestDispatcher("log_in?command=log_in").forward(request,response);
         }
         if (user != null && specialCommands.containsKey(command) && !specialCommands.get(command).equals(user.getRole()))
-            request.getRequestDispatcher("book_list?command=show_all_books").forward(request,response);
+            request.getRequestDispatcher("/WEB-INF/views/fail.jsp").forward(request,response);
         filterChain.doFilter(servletRequest,servletResponse);
     }
 

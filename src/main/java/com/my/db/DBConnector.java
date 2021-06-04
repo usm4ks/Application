@@ -11,7 +11,7 @@ import java.sql.*;
 public class DBConnector {
 
     private static final Logger LOGGER = Logger.getLogger(DBConnector.class);
-    private final String closeError = "close() error";
+    private static final String closeError = "close() error";
 
 
     private DBConnector(){

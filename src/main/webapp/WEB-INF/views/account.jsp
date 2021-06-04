@@ -34,12 +34,12 @@
     <c:if test="${sessionScope.user.role.roleName == 'user'}">
         <tr>
             <th scope="row"><fmt:message key="blocked"/>:</th>
-            <td><m:blockStatus status="${sessionScope.user.blocked}"/></td>
+            <td><fmt:message key="${sessionScope.user.blocked}"/></td>
         </tr>
     </c:if>
     <tr>
         <th scope="row"><fmt:message key="role"/>:</th>
-        <td>${sessionScope.user.role.roleName}</td>
+        <td><fmt:message key="${sessionScope.user.role.roleName}"/></td>
     </tr>
     </tbody>
 </table>
