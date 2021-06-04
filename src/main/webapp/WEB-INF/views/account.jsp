@@ -49,7 +49,7 @@
         <h3><fmt:message key="ordered_books"/>:</h3>
         <div class="card" style="width: 18rem;">
             <ul class="list-group list-group-flush">
-                <c:forEach var="order" items="${sessionScope.ordered_books}">
+                <c:forEach var="order" items="${requestScope.ordered_books}">
                     <li class="list-group-item">&laquo;${order.book.title}&raquo; ${order.book.author}.(<fmt:message key="ordered"/>: <fmt:message key="${order.type.type}"/>)</li>
                 </c:forEach>
             </ul>
@@ -58,7 +58,7 @@
         <h3><fmt:message key="books_on_ticket"/>:</h3>
         <div class="card" style="width: 18rem;">
             <ul class="list-group list-group-flush">
-                <c:forEach var="bookOnTicket" items="${sessionScope.books_on_ticket}">
+                <c:forEach var="bookOnTicket" items="${requestScope.books_on_ticket}">
                     <li class="list-group-item">&laquo;${bookOnTicket.book.title}&raquo; ${bookOnTicket.book.author}.(<fmt:message key="until"/>: ${bookOnTicket.untilDate})<br/><c:if test="${bookOnTicket.fine>0}"><p style="color: red"><fmt:message key="fine"/>: ${bookOnTicket.fine}</p> </c:if> </li>
                 </c:forEach>
             </ul>
@@ -67,7 +67,7 @@
         <h3><fmt:message key="books_in_hall"/>:</h3>
         <div class="card" style="width: 18rem;">
             <ul class="list-group list-group-flush">
-                <c:forEach var="bookInHall" items="${sessionScope.books_in_hall}">
+                <c:forEach var="bookInHall" items="${requestScope.books_in_hall}">
                     <li class="list-group-item">&laquo;${bookInHall.book.title}&raquo; ${bookInHall.book.author}.</li>
                 </c:forEach>
             </ul>
