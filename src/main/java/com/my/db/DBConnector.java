@@ -41,9 +41,10 @@ public class DBConnector {
 
     public void close(PreparedStatement pst, Connection con) {
         try {
-            if (pst != null)
+            if (pst != null) {
                 pst.close();
-                close(con);
+            }
+            close(con);
         } catch (SQLException e) {
             LOGGER.error(CLOSE_ERROR,e);
         }
@@ -51,8 +52,9 @@ public class DBConnector {
     }
     public void close(ResultSet rs, PreparedStatement pst, Connection con) {
         try {
-            if (rs != null)
+            if (rs != null) {
                 rs.close();
+            }
             close(pst, con);
         } catch (SQLException e) {
             LOGGER.error(CLOSE_ERROR,e);
@@ -61,8 +63,9 @@ public class DBConnector {
     }
     public void close(Statement st, Connection con) {
         try {
-            if (st != null)
+            if (st != null) {
                 st.close();
+            }
             close(con);
         } catch (SQLException e) {
             LOGGER.error(CLOSE_ERROR,e);
@@ -70,8 +73,9 @@ public class DBConnector {
     }
     public void close(ResultSet rs, Statement st, Connection con) {
         try {
-            if (rs != null)
+            if (rs != null) {
                 rs.close();
+            }
             close(st, con);
         } catch (SQLException e) {
             LOGGER.error(CLOSE_ERROR,e);

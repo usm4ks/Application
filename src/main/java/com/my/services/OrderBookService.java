@@ -19,6 +19,7 @@ public class OrderBookService {
     private DBConnector dbConnector;
 
     private static final Logger LOGGER = Logger.getLogger(OrderBookService.class);
+    private static final int DECREMENT = -1;
 
     private OrderBookService(){}
 
@@ -42,7 +43,7 @@ public class OrderBookService {
         try {
             connection.setAutoCommit(false);
             orderDAO.addBookToOrder(connection,userId,bookId,orderType);
-            bookDAO.changeBookAmountById(connection,bookId,-1);
+            bookDAO.changeBookAmountById(connection,bookId,DECREMENT);
             connection.commit();
         } catch (SQLException e) {
             LOGGER.error("orderBook() error",e);
