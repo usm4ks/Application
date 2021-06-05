@@ -170,7 +170,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection.rollback();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("rollback() error",e);
         }
     }
 }
