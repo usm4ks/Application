@@ -1,64 +1,81 @@
 package com.my.command.user.authorization;
 
-import com.my.dao.DAOFactory;
-import com.my.dao.user.impl.UserDAOImpl;
+
+import com.my.dao.user.UserDAO;
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
 import com.my.exception.CommandException;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LogInCommandTest {
+
+    @Mock
+    UserDAO userDAO;
+    @Mock
+    HttpSession session;
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
+    @Mock
+    ApplicationException applicationException;
 
     @Test
     public void executeShouldReturnPathWhenUserNull() throws ApplicationException, CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        LogInCommand logInCommand = new LogInCommand(daoFactory.getUserDAO());
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        //given
+        LogInCommand logInCommand = new LogInCommand(userDAO);
+
+        //when
         when(request.getParameter("email")).thenReturn(anyString());
         when(request.getParameter("password")).thenReturn("password");
-        when(request.getSession()).thenReturn(mock(HttpSession.class));
-        when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
-        when(daoFactory.getUserDAO().getUserByEmail(anyString())).thenReturn(null);
-        Assert.assertEquals("index.jsp",logInCommand.execute(request,response));
+        when(request.getSession()).thenReturn(session);
+        when(userDAO.getUserByEmail(anyString())).thenReturn(null);
+
+        //then
+        assertEquals("index.jsp",logInCommand.execute(request,response));
     }
 
     @Test
     public void executeShouldReturnPath() throws ApplicationException,CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        LogInCommand logInCommand = new LogInCommand(daoFactory.getUserDAO());
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        when(request.getParameter("email")).thenReturn(anyString());
-        when(request.getParameter("password")).thenReturn("password");
-        when(request.getSession()).thenReturn(mock(HttpSession.class));
-        when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
+        //given
+        LogInCommand logInCommand = new LogInCommand(userDAO);
         User user = new User();
         user.setPassword(DigestUtils.md5Hex("password"));
-        when(daoFactory.getUserDAO().getUserByEmail(anyString())).thenReturn(user);
-        Assert.assertEquals("book_list?command=show_all_books&page=1",logInCommand.execute(request,response));
-    }
 
-    @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException,CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        LogInCommand logInCommand = new LogInCommand(daoFactory.getUserDAO());
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        //when
         when(request.getParameter("email")).thenReturn(anyString());
         when(request.getParameter("password")).thenReturn("password");
-        when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
-        when(daoFactory.getUserDAO().getUserByEmail(anyString())).thenThrow(mock(ApplicationException.class));
+        when(request.getSession()).thenReturn(session);
+        when(userDAO.getUserByEmail(anyString())).thenReturn(user);
+
+        //then
+        assertEquals("book_list?command=show_all_books&page=1",logInCommand.execute(request,response));
+    }
+
+    @Test(expected = CommandException.class)
+    public void executeShouldThrowException() throws ApplicationException,CommandException {
+        //given
+        LogInCommand logInCommand = new LogInCommand(userDAO);
+
+        //when
+        when(request.getParameter("email")).thenReturn(anyString());
+        when(request.getParameter("password")).thenReturn("password");
+        when(userDAO.getUserByEmail(anyString())).thenThrow(applicationException);
+
+        //then
         logInCommand.execute(request,response);
     }
 

@@ -1,39 +1,47 @@
 package com.my.command.book.show;
 
-import com.my.command.Command;
-import com.my.command.CommandConstants;
-import com.my.command.CommandFactory;
-import com.my.dao.DAOFactory;
-import com.my.dao.book.impl.BookDAOImpl;
-import com.my.exception.ApplicationException;
+import com.my.dao.book.BookDAO;
 import com.my.exception.CommandException;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ShowAllBooksCommandTest {
 
-    @Test(expected = ApplicationException.class)
+    @Mock
+    BookDAO bookDAO;
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
+
+    @Test(expected = CommandException.class)
     public void executeShouldThrowExceptionIfPageNotCorrect() throws CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        CommandFactory commandFactory = new CommandFactory(daoFactory);
-        Command showAllBooksCommand = commandFactory.getCommand(CommandConstants.SHOW_ALL_BOOKS);
-        HttpServletRequest request = mock(HttpServletRequest.class);
+        //given
+        ShowAllBooksCommand showAllBooksCommand = new ShowAllBooksCommand(bookDAO);
+
+        //when
         when(request.getParameter("page")).thenReturn("abc");
-        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        //then
         showAllBooksCommand.execute(request,response);
     }
 
     @Test
     public void executeShouldReturnPath() throws CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowAllBooksCommand showAllBooksCommand = new ShowAllBooksCommand(daoFactory.getBookDAO());
-        when(daoFactory.getBookDAO()).thenReturn(mock(BookDAOImpl.class));
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        Assert.assertEquals("/WEB-INF/views/book_list.jsp",showAllBooksCommand.execute(request,response));
+        //given
+        ShowAllBooksCommand showAllBooksCommand = new ShowAllBooksCommand(bookDAO);
+
+        //then
+        assertEquals("/WEB-INF/views/book_list.jsp",showAllBooksCommand.execute(request,response));
     }
 
 }

@@ -1,39 +1,51 @@
 package com.my.command.book.edit;
 
-import com.my.dao.DAOFactory;
-import com.my.dao.book.impl.BookDAOImpl;
-import com.my.dao.book.impl.BookInHallDAOImpl;
-import com.my.dao.book.impl.BookOnTicketDAOImpl;
+import com.my.dao.book.BookDAO;
+import com.my.dao.book.BookInHallDAO;
+import com.my.dao.book.BookOnTicketDAO;
 import com.my.entities.Book;
 import com.my.exception.ApplicationException;
 import com.my.exception.CommandException;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DeleteBookCommandTest {
+
+    @Mock
+    BookDAO bookDAO;
+    @Mock
+    BookOnTicketDAO bookOnTicketDAO;
+    @Mock
+    BookInHallDAO bookInHallDAO;
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
 
     @Test
     public void executeShouldReturnPath() throws ApplicationException, CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        DeleteBookCommand deleteBookCommand = new DeleteBookCommand(daoFactory.getBookDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO());
-        when(daoFactory.getBookDAO()).thenReturn(mock(BookDAOImpl.class));
-        when(daoFactory.getBookDAO().getBookById(1)).thenReturn(mock(Book.class));
-        when(daoFactory.getBookInHallDAO()).thenReturn(mock(BookInHallDAOImpl.class));
-        when(daoFactory.getBookInHallDAO().getBookInHallByBookId(1)).thenReturn(new ArrayList<>());
-        when(daoFactory.getBookOnTicketDAO()).thenReturn(mock(BookOnTicketDAOImpl.class));
-        when(daoFactory.getBookOnTicketDAO().getBookOnTicketByBookId(1)).thenReturn(new ArrayList<>());
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        //given
+        DeleteBookCommand deleteBookCommand = new DeleteBookCommand(bookDAO,bookOnTicketDAO,bookInHallDAO);
+
+        //when
+        when(bookDAO.getBookById(1)).thenReturn(new Book());
+        when(bookInHallDAO.getBookInHallByBookId(1)).thenReturn(new ArrayList<>());
+        when(bookOnTicketDAO.getBookOnTicketByBookId(1)).thenReturn(new ArrayList<>());
         when(request.getParameter("bookId")).thenReturn("1");
-        Assert.assertEquals("book_list?command=show_all_books",deleteBookCommand.execute(request,response));
+
+        //then
+        assertEquals("book_list?command=show_all_books",deleteBookCommand.execute(request,response));
     }
 
 }

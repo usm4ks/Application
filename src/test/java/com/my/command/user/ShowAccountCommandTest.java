@@ -1,50 +1,72 @@
 package com.my.command.user;
 
-import com.my.dao.DAOFactory;
-import com.my.dao.order.impl.OrderDAOImpl;
+import com.my.dao.book.BookInHallDAO;
+import com.my.dao.book.BookOnTicketDAO;
+import com.my.dao.order.OrderDAO;
 import com.my.entities.User;
 import com.my.enums.UserRole;
 import com.my.exception.ApplicationException;
 import com.my.exception.CommandException;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ShowAccountCommandTest {
+
+    @Mock
+    OrderDAO orderDAO;
+    @Mock
+    BookOnTicketDAO bookOnTicketDAO;
+    @Mock
+    BookInHallDAO bookInHallDAO;
+    @Mock
+    HttpSession session;
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
+    @Mock
+    ApplicationException applicationException;
 
 
     @Test
     public void executeShouldReturnPath() throws ApplicationException, CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowAccountCommand showAccountCommand = new ShowAccountCommand(daoFactory.getOrderDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO());
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        when(request.getSession()).thenReturn(mock(HttpSession.class));
-        User user = mock(User.class);
+        //given
+        ShowAccountCommand showAccountCommand = new ShowAccountCommand(orderDAO,bookOnTicketDAO,bookInHallDAO);
+        User user = new User();
+        user.setRole(UserRole.LIBRARIAN);
+
+        //when
+        when(request.getSession()).thenReturn(session);
         when(request.getSession().getAttribute("user")).thenReturn(user);
-        when(user.getRole()).thenReturn(UserRole.LIBRARIAN);
-       Assert.assertEquals("WEB-INF/views/account.jsp",showAccountCommand.execute(request,response));
+
+        //then
+        assertEquals("WEB-INF/views/account.jsp",showAccountCommand.execute(request,response));
     }
 
-    @Test(expected = ApplicationException.class)
+    @Test(expected = CommandException.class)
     public void executeShouldThrowException() throws ApplicationException,CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowAccountCommand showAccountCommand = new ShowAccountCommand(daoFactory.getOrderDAO(),daoFactory.getBookOnTicketDAO(), daoFactory.getBookInHallDAO());
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        when(request.getSession()).thenReturn(mock(HttpSession.class));
-        User user = mock(User.class);
+        //given
+        ShowAccountCommand showAccountCommand = new ShowAccountCommand(orderDAO,bookOnTicketDAO,bookInHallDAO);
+        User user = new User();
+        user.setRole(UserRole.USER);
+
+        //when
+        when(request.getSession()).thenReturn(session);
         when(request.getSession().getAttribute("user")).thenReturn(user);
-        when(user.getRole()).thenReturn(UserRole.USER);
-        when(daoFactory.getOrderDAO()).thenReturn(mock(OrderDAOImpl.class));
-        when(daoFactory.getOrderDAO().getUserOrders(anyInt())).thenThrow(mock(ApplicationException.class));
+        when(orderDAO.getUserOrders(anyInt())).thenThrow(applicationException);
+
+        //then
         showAccountCommand.execute(request,response);
     }
 

@@ -1,23 +1,30 @@
 package com.my.command.book.edit;
 
-import com.my.dao.DAOFactory;
-import org.junit.Assert;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertEquals;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class AddNewBookFormCommandTest {
+
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
 
     @Test
     public void executeShouldReturnPath(){
-        DAOFactory daoFactory = mock(DAOFactory.class);
+        //given
         AddNewBookFormCommand addNewBookFormCommand = new AddNewBookFormCommand();
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        Assert.assertEquals("/WEB-INF/views/add_new_book_form.jsp",addNewBookFormCommand.execute(request,response));
+
+        //then
+        assertEquals("/WEB-INF/views/add_new_book_form.jsp",addNewBookFormCommand.execute(request,response));
     }
 }

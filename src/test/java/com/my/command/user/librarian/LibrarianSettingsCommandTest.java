@@ -1,43 +1,55 @@
 package com.my.command.user.librarian;
 
-import com.my.dao.DAOFactory;
-import com.my.dao.user.impl.UserDAOImpl;
+import com.my.dao.user.UserDAO;
 import com.my.enums.UserRole;
 import com.my.exception.ApplicationException;
 import com.my.exception.CommandException;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LibrarianSettingsCommandTest {
+
+    @Mock
+    UserDAO userDAO;
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
+    @Mock
+    ApplicationException applicationException;
 
 
     @Test
     public void executeShouldReturnPath() throws CommandException,ApplicationException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        LibrarianSettingsCommand librarianSettingsCommand = new LibrarianSettingsCommand(daoFactory.getUserDAO());
-        when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
-        when(daoFactory.getUserDAO().getAllUsersByRole(UserRole.LIBRARIAN.getRoleName())).thenReturn(new ArrayList<>());
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        Assert.assertEquals("/WEB-INF/views/librarians_settings.jsp",librarianSettingsCommand.execute(request,response));
+        //given
+        LibrarianSettingsCommand librarianSettingsCommand = new LibrarianSettingsCommand(userDAO);
+
+        //when
+        when(userDAO.getAllUsersByRole(UserRole.LIBRARIAN.getRoleName())).thenReturn(new ArrayList<>());
+
+        //then
+        assertEquals("/WEB-INF/views/librarians_settings.jsp",librarianSettingsCommand.execute(request,response));
     }
 
-    @Test(expected = ApplicationException.class)
+    @Test(expected = CommandException.class)
     public void executeShouldThrowException() throws CommandException,ApplicationException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        LibrarianSettingsCommand librarianSettingsCommand = new LibrarianSettingsCommand(daoFactory.getUserDAO());
-        when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
-        when(daoFactory.getUserDAO().getAllUsersByRole(UserRole.LIBRARIAN.getRoleName())).thenThrow(mock(ApplicationException.class));
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        //given
+        LibrarianSettingsCommand librarianSettingsCommand = new LibrarianSettingsCommand(userDAO);
+
+        //when
+        when(userDAO.getAllUsersByRole(UserRole.LIBRARIAN.getRoleName())).thenThrow(applicationException);
+
+        //then
         librarianSettingsCommand.execute(request,response);
     }
 

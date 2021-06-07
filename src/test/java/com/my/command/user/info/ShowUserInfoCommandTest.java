@@ -1,54 +1,69 @@
 package com.my.command.user.info;
 
 
-import com.my.dao.DAOFactory;
-import com.my.dao.book.impl.BookInHallDAOImpl;
-import com.my.dao.book.impl.BookOnTicketDAOImpl;
-import com.my.dao.user.impl.UserDAOImpl;
+import com.my.dao.book.BookInHallDAO;
+import com.my.dao.book.BookOnTicketDAO;
+import com.my.dao.user.UserDAO;
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
 import com.my.exception.CommandException;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ShowUserInfoCommandTest {
 
+    @Mock
+    UserDAO userDAO;
+    @Mock
+    BookOnTicketDAO bookOnTicketDAO;
+    @Mock
+    BookInHallDAO bookInHallDAO;
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
+    @Mock
+    ApplicationException applicationException;
 
-    @Test(expected = ApplicationException.class)
+
+    @Test(expected = CommandException.class)
     public void executeShouldThrowException() throws ApplicationException, CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowUserInfoCommand showUserInfoCommand = new ShowUserInfoCommand(daoFactory.getUserDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO());
-        when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
-        when(daoFactory.getUserDAO().getUserById(anyInt())).thenThrow(ApplicationException.class);
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        //given
+        ShowUserInfoCommand showUserInfoCommand = new ShowUserInfoCommand(userDAO,bookOnTicketDAO,bookInHallDAO);
+
+        //when
+        when(userDAO.getUserById(anyInt())).thenThrow(applicationException);
         when(request.getParameter("userId")).thenReturn("1");
+
+        //then
         showUserInfoCommand.execute(request,response);
     }
 
     @Test
     public void executeShouldReturnPath() throws ApplicationException,CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowUserInfoCommand showUserInfoCommand = new ShowUserInfoCommand(daoFactory.getUserDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO());
-        when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
-        when(daoFactory.getUserDAO().getUserById(anyInt())).thenReturn(mock(User.class));
-        when(daoFactory.getBookOnTicketDAO()).thenReturn(mock(BookOnTicketDAOImpl.class));
-        when(daoFactory.getBookOnTicketDAO().getAllBooksOnUserTicket(anyInt())).thenReturn(new ArrayList<>());
-        when(daoFactory.getBookInHallDAO()).thenReturn(mock(BookInHallDAOImpl.class));
-        when(daoFactory.getBookInHallDAO().getAllUserBooksInHall(anyInt())).thenReturn(new ArrayList<>());
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        //given
+        ShowUserInfoCommand showUserInfoCommand = new ShowUserInfoCommand(userDAO,bookOnTicketDAO,bookInHallDAO);
+
+        //when
+        when(userDAO.getUserById(anyInt())).thenReturn(new User());
+        when(bookOnTicketDAO.getAllBooksOnUserTicket(anyInt())).thenReturn(new ArrayList<>());
+        when(bookInHallDAO.getAllUserBooksInHall(anyInt())).thenReturn(new ArrayList<>());
         when(request.getParameter("userId")).thenReturn("1");
-        Assert.assertEquals("/WEB-INF/views/user_info.jsp",showUserInfoCommand.execute(request,response));
+
+        //then
+        assertEquals("/WEB-INF/views/user_info.jsp",showUserInfoCommand.execute(request,response));
     }
 
 }

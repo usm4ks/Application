@@ -2,37 +2,55 @@ package com.my.command.user;
 
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import static org.mockito.Mockito.mock;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SetLangCommandTest {
+
+    @Mock
+    HttpSession session;
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
 
     @Test
     public void executeShouldReturnPath() throws ApplicationException {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        when(request.getParameter("lang")).thenReturn("ru");
+        //given
         SetLangCommand setLangCommand = new SetLangCommand();
-        when(request.getSession()).thenReturn(mock(HttpSession.class));
-        when(request.getSession().getAttribute("user")).thenReturn(mock(User.class));
-        Assert.assertEquals("book_list?command=show_all_books",setLangCommand.execute(request,response));
+        User user = new User();
+
+        //when
+        when(request.getParameter("lang")).thenReturn("ru");
+        when(request.getSession()).thenReturn(session);
+        when(request.getSession().getAttribute("user")).thenReturn(user);
+
+        //then
+        assertEquals("book_list?command=show_all_books",setLangCommand.execute(request,response));
     }
 
     @Test
     public void executeShouldReturnPathIfUserNull() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        when(request.getParameter("lang")).thenReturn("ru");
+        //given
         SetLangCommand setLangCommand = new SetLangCommand();
-        when(request.getSession()).thenReturn(mock(HttpSession.class));
+
+        //when
+        when(request.getParameter("lang")).thenReturn("ru");
+        when(request.getSession()).thenReturn(session);
         when(request.getSession().getAttribute("user")).thenReturn(null);
-        Assert.assertEquals("index.jsp",setLangCommand.execute(request,response));
+
+        //then
+        assertEquals("index.jsp",setLangCommand.execute(request,response));
     }
 
 }

@@ -1,45 +1,58 @@
 package com.my.command.user.settings;
 
-import com.my.dao.DAOFactory;
-import com.my.dao.user.impl.UserDAOImpl;
+import com.my.dao.user.UserDAO;
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
 import com.my.exception.CommandException;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UnblockUserCommandTest {
+
+    @Mock
+    UserDAO userDAO;
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
+    @Mock
+    ApplicationException applicationException;
 
     @Test
     public void executeShouldReturnPath() throws ApplicationException, CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        UnblockUserCommand unblockUserCommand = new UnblockUserCommand(daoFactory.getUserDAO());
-        when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
-        User user = mock(User.class);
-        when(daoFactory.getUserDAO().getUserById(anyInt())).thenReturn(user);
-        when(user.isBlocked()).thenReturn(false);
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        //given
+        UnblockUserCommand unblockUserCommand = new UnblockUserCommand(userDAO);
+        User user = new User();
+        user.setBlocked(false);
+
+        //when
+        when(userDAO.getUserById(anyInt())).thenReturn(user);
         when(request.getParameter("userId")).thenReturn("1");
-        Assert.assertEquals("account?command=users_settings",unblockUserCommand.execute(request,response));
+
+        //then
+        assertEquals("account?command=users_settings",unblockUserCommand.execute(request,response));
     }
 
-    @Test(expected = ApplicationException.class)
+    @Test(expected = CommandException.class)
     public void executeShouldThrowException() throws ApplicationException,CommandException {
-        DAOFactory daoFactory = mock(DAOFactory.class);
-        UnblockUserCommand unblockUserCommand = new UnblockUserCommand(daoFactory.getUserDAO());
-        when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
-        when(daoFactory.getUserDAO().getUserById(anyInt())).thenThrow(mock(ApplicationException.class));
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+        //given
+        UnblockUserCommand unblockUserCommand = new UnblockUserCommand(userDAO);
+
+        //when
+        when(userDAO.getUserById(anyInt())).thenThrow(applicationException);
         when(request.getParameter("userId")).thenReturn("1");
+
+        //then
         unblockUserCommand.execute(request,response);
     }
 
