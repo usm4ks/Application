@@ -5,6 +5,7 @@ public class ApplicationException extends Exception{
     private final String message;
     private final Throwable exception;
 
+    @Override
     public String getMessage() {
         return message;
     }

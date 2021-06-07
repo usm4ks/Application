@@ -2,7 +2,6 @@ package com.my.util;
 
 import com.my.command.Command;
 import com.my.command.CommandFactory;
-import com.my.exception.ApplicationException;
 import com.my.exception.CommandException;
 import org.apache.log4j.Logger;
 

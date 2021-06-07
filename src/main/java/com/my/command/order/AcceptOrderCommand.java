@@ -36,7 +36,6 @@ public class AcceptOrderCommand  implements Command {
                 OrderBookService.getInstance().acceptOrder(userId,bookId,null,OrderType.IN_HALL);
             } catch (ApplicationException e) {
                 LOGGER.error(e);
-                //todo command exception
                 throw new CommandException("Can't accept order",e);
             }
         }
