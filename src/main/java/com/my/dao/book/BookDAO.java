@@ -7,11 +7,12 @@ import com.my.exception.ApplicationException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public interface BookDAO {
 
     void setDBConnector(DBConnector dbConnector);
-    List<Book> getAllBooks(int page) throws ApplicationException;
+    List<Book> getAllBooks(Optional<Integer> page) throws ApplicationException;
     List<Book> searchBook(String search) throws ApplicationException;
     List<Book> getSortedBooks(int page,String type) throws ApplicationException;
     Book getBookById(int id) throws ApplicationException;

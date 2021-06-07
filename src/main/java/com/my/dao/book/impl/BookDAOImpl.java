@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class BookDAOImpl implements BookDAO {
 
@@ -43,25 +44,24 @@ public class BookDAOImpl implements BookDAO {
         this.dbConnector = dbConnector;
     }
 
-//get start point
+
     /**
      * This method return 5 books for every page
      * @param page - number of page
-     * if  page <= 0 - methods returns all books from data base
+     * if  page is empty - methods returns all books from data base
      * @return list of books
      */
-    // int ==> optional<ineteger>
     @Override
-    public List<Book> getAllBooks(int page) throws ApplicationException {
+    public List<Book> getAllBooks(Optional<Integer> page) throws ApplicationException {
         List<Book> bookList = new ArrayList<>();
         Connection con = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
             con = dbConnector.getConnection();
-            if (page > 0) {
+            if (page.isPresent()) {
                 pst = con.prepareStatement(SELECT_FIVE_BOOKS);
-                pst.setInt(1, page * 5 - 5);
+                pst.setInt(1, getStartPoint(page.get()));
             } else {
                 pst = con.prepareStatement(SELECT_ALL_BOOKS);
             }
@@ -81,7 +81,6 @@ public class BookDAOImpl implements BookDAO {
     /**
      * This method return 5 books for every page from sorted data
      * @param page - number of page
-     * if  page <= 0 - methods returns all sorted books from data base
      * @return list of books
      */
     @Override
@@ -93,7 +92,7 @@ public class BookDAOImpl implements BookDAO {
         try {
             con = dbConnector.getConnection();
             pst = con.prepareStatement(getTypeOfSorter(type));
-            pst.setInt(1,page*5-5);
+            pst.setInt(1,getStartPoint(page));
             rs = pst.executeQuery();
             while (rs.next()){
                 bookList.add(InstanceUtils.buildBook(rs,false));
@@ -266,6 +265,10 @@ public class BookDAOImpl implements BookDAO {
         }finally {
            dbConnector.close(pst,con);
         }
+    }
+
+    private int getStartPoint(int page){
+        return page * 5 - 5;
     }
 
     private String getTypeOfSorter(String type){

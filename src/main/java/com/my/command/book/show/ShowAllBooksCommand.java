@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 public class ShowAllBooksCommand implements Command {
 
@@ -29,9 +30,9 @@ public class ShowAllBooksCommand implements Command {
             if (page > 1){
                 request.setAttribute("previous", String.format("book_list?command=show_all_books&page=%d", page-1));
             }
-            List<Book> bookList = bookDAO.getAllBooks(page);
+            List<Book> bookList = bookDAO.getAllBooks(Optional.of(page));
             request.setAttribute("book_list", bookList);
-            if (!bookDAO.getAllBooks(page+1).isEmpty()){
+            if (!bookDAO.getAllBooks(Optional.of(page+1)).isEmpty()){
                 request.setAttribute("next",String.format("book_list?command=show_all_books&page=%d", page+1));
             }
         } catch (ApplicationException e) {
