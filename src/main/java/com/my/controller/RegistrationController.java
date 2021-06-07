@@ -3,8 +3,8 @@ package com.my.controller;
 import com.my.command.Command;
 import com.my.command.CommandConstants;
 import com.my.command.CommandFactory;
-import com.my.exception.ApplicationException;
-import com.my.util.ControllerHelper;
+import com.my.exception.CommandException;
+import com.my.util.ControllerUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -31,7 +31,7 @@ public class RegistrationController extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        ControllerHelper.doPost(req,resp,commandFactory);
+        ControllerUtils.doPost(req,resp,commandFactory);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class RegistrationController extends HttpServlet {
         Command command = commandFactory.getCommand(stringCommand);
         try {
             resp.sendRedirect(command.execute(req,resp));
-        } catch (ApplicationException e) {
+        } catch (CommandException e) {
             LOGGER.error(e);
             req.setAttribute("error_message",e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req,resp);

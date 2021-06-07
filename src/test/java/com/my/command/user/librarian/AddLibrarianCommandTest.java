@@ -1,9 +1,11 @@
 package com.my.command.user.librarian;
 
 
+import com.my.command.Command;
 import com.my.dao.DAOFactory;
 import com.my.dao.user.impl.UserDAOImpl;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,9 +21,9 @@ public class AddLibrarianCommandTest {
 
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws ApplicationException, CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        AddLibrarianCommand addLibrarianCommand = new AddLibrarianCommand(daoFactory);
+        AddLibrarianCommand addLibrarianCommand = new AddLibrarianCommand(daoFactory.getUserDAO());
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         when(daoFactory.getUserDAO().getUserByEmail(anyString())).thenReturn(null);
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -31,9 +33,9 @@ public class AddLibrarianCommandTest {
         Assert.assertEquals("account?command=librarians_settings",addLibrarianCommand.execute(request,response));
     }
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws ApplicationException,CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        AddLibrarianCommand addLibrarianCommand = new AddLibrarianCommand(daoFactory);
+        AddLibrarianCommand addLibrarianCommand = new AddLibrarianCommand(daoFactory.getUserDAO());
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         when(daoFactory.getUserDAO().getUserByEmail(anyString())).thenThrow(mock(ApplicationException.class));
         HttpServletRequest request = mock(HttpServletRequest.class);

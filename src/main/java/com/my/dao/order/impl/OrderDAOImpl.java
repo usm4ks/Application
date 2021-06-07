@@ -6,7 +6,7 @@ import com.my.entities.Order;
 import com.my.enums.OrderType;
 import com.my.exception.ApplicationException;
 
-import com.my.util.InstanceBuilder;
+import com.my.util.InstanceUtils;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -54,7 +54,7 @@ public class OrderDAOImpl implements OrderDAO {
                 orderList.add(createOrder(rs));
             }
         } catch (SQLException e) {
-            LOGGER.error("getAllOrders() error",e);
+            LOGGER.error("Get all orders failed with error",e);
             throw new ApplicationException("Can't get all orders",e);
         } finally {
             dbConnector.close(rs,st,con);
@@ -87,7 +87,7 @@ public class OrderDAOImpl implements OrderDAO {
                  orderList.add(createOrder(rs));
             }
         } catch (SQLException e) {
-            LOGGER.error("getUserOrders() error",e);
+            LOGGER.error("Get all user orders failed with error",e);
             throw new ApplicationException("Can't get all orders was made by user",e);
         }finally {
             dbConnector.close(rs,pst,con);
@@ -111,7 +111,7 @@ public class OrderDAOImpl implements OrderDAO {
                 order = createOrder(rs);
             }
         } catch (SQLException e) {
-            LOGGER.error("getUserOrder() error",e);
+            LOGGER.error("Get user order failed with error",e);
             throw new ApplicationException("Can't get user order by book id and user id",e);
         }finally {
             dbConnector.close(rs,pst,con);
@@ -121,8 +121,8 @@ public class OrderDAOImpl implements OrderDAO {
 
     private Order createOrder(ResultSet rs) throws SQLException {
         return new Order(
-                InstanceBuilder.buildUser(rs,true),
-                InstanceBuilder.buildBook(rs,true),
+                InstanceUtils.buildUser(rs,true),
+                InstanceUtils.buildBook(rs,true),
                 OrderType.valueOf(rs.getString("type").toUpperCase(Locale.ROOT)));
     }
 }

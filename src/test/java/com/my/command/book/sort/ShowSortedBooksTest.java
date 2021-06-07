@@ -6,11 +6,11 @@ import com.my.command.CommandFactory;
 import com.my.dao.DAOFactory;
 import com.my.dao.book.impl.BookDAOImpl;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -18,9 +18,9 @@ import static org.mockito.Mockito.when;
 public class ShowSortedBooksTest {
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowSortedBooks showSortedBooks = new ShowSortedBooks(daoFactory);
+        ShowSortedBooks showSortedBooks = new ShowSortedBooks(daoFactory.getBookDAO());
         when(daoFactory.getBookDAO()).thenReturn(mock(BookDAOImpl.class));
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
@@ -29,7 +29,7 @@ public class ShowSortedBooksTest {
     }
 
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
         CommandFactory commandFactory = new CommandFactory(daoFactory);
         Command showSortedBooks = commandFactory.getCommand(CommandConstants.SHOW_SORTED_BOOKS);

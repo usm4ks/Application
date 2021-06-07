@@ -10,9 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateValue extends TagSupport {
+public class DateTag extends TagSupport {
 
-    private static final Logger LOGGER = Logger.getLogger(DateValue.class);
+    private static final Logger LOGGER = Logger.getLogger(DateTag.class);
     private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 

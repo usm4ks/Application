@@ -6,6 +6,7 @@ import com.my.dao.book.impl.BookInHallDAOImpl;
 import com.my.dao.book.impl.BookOnTicketDAOImpl;
 import com.my.entities.Book;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,9 +21,9 @@ import static org.mockito.Mockito.when;
 public class DeleteBookCommandTest {
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws ApplicationException, CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        DeleteBookCommand deleteBookCommand = new DeleteBookCommand(daoFactory);
+        DeleteBookCommand deleteBookCommand = new DeleteBookCommand(daoFactory.getBookDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO());
         when(daoFactory.getBookDAO()).thenReturn(mock(BookDAOImpl.class));
         when(daoFactory.getBookDAO().getBookById(1)).thenReturn(mock(Book.class));
         when(daoFactory.getBookInHallDAO()).thenReturn(mock(BookInHallDAOImpl.class));

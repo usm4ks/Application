@@ -3,6 +3,7 @@ package com.my.command.book.edit;
 import com.my.dao.DAOFactory;
 import com.my.dao.book.impl.BookDAOImpl;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,9 +17,9 @@ public class EditBookCommandTest {
 
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        EditBookCommand editBookCommand = new EditBookCommand(daoFactory);
+        EditBookCommand editBookCommand = new EditBookCommand(daoFactory.getBookDAO());
         when(daoFactory.getBookDAO()).thenReturn(mock(BookDAOImpl.class));
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);

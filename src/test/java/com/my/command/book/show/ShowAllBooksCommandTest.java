@@ -6,6 +6,7 @@ import com.my.command.CommandFactory;
 import com.my.dao.DAOFactory;
 import com.my.dao.book.impl.BookDAOImpl;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,7 @@ import static org.mockito.Mockito.*;
 public class ShowAllBooksCommandTest {
 
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowExceptionIfPageNotCorrect() throws ApplicationException {
+    public void executeShouldThrowExceptionIfPageNotCorrect() throws CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
         CommandFactory commandFactory = new CommandFactory(daoFactory);
         Command showAllBooksCommand = commandFactory.getCommand(CommandConstants.SHOW_ALL_BOOKS);
@@ -26,9 +27,9 @@ public class ShowAllBooksCommandTest {
     }
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowAllBooksCommand showAllBooksCommand = new ShowAllBooksCommand(daoFactory);
+        ShowAllBooksCommand showAllBooksCommand = new ShowAllBooksCommand(daoFactory.getBookDAO());
         when(daoFactory.getBookDAO()).thenReturn(mock(BookDAOImpl.class));
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);

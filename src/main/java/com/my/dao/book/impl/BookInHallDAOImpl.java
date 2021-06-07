@@ -4,7 +4,7 @@ import com.my.dao.book.BookInHallDAO;
 import com.my.db.DBConnector;
 import com.my.entities.BookInHall;
 import com.my.exception.ApplicationException;
-import com.my.util.InstanceBuilder;
+import com.my.util.InstanceUtils;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -52,7 +52,7 @@ public class BookInHallDAOImpl implements BookInHallDAO {
                 bookInHallList.add(createBookInHall(rs));
             }
         } catch (SQLException e) {
-            LOGGER.error("getAllUserBooksInHall() error",e);
+            LOGGER.error("Get all user books in hall failed with error",e);
             throw new ApplicationException("Can't get all books that user have taken in hall",e);
         } finally {
             dbConnector.close(rs,pst,con);
@@ -76,7 +76,7 @@ public class BookInHallDAOImpl implements BookInHallDAO {
                 bookInHall = createBookInHall(rs);
             }
         } catch (SQLException e) {
-            LOGGER.error("getUserBookInHall() error",e);
+            LOGGER.error("Get user book in hall failed with error",e);
             throw new ApplicationException("Can't get book in hall by book id and user id",e);
         } finally {
             dbConnector.close(rs,pst,con);
@@ -99,7 +99,7 @@ public class BookInHallDAOImpl implements BookInHallDAO {
                  bookInHallList.add(createBookInHall(rs));
             }
         } catch (SQLException e) {
-            LOGGER.error("getBookInHallByBookId() error",e);
+            LOGGER.error("Get book in hall by book id failed with error",e);
             throw new ApplicationException("Can't get all books in hall by book id",e);
         }finally {
             dbConnector.close(rs,pst,con);
@@ -117,8 +117,8 @@ public class BookInHallDAOImpl implements BookInHallDAO {
 
     private BookInHall createBookInHall(ResultSet rs) throws SQLException {
         BookInHall bookInHall = new BookInHall();
-        bookInHall.setBook(InstanceBuilder.buildBook(rs,true));
-        bookInHall.setUser(InstanceBuilder.buildUser(rs,true));
+        bookInHall.setBook(InstanceUtils.buildBook(rs,true));
+        bookInHall.setUser(InstanceUtils.buildUser(rs,true));
         return bookInHall;
     }
 }

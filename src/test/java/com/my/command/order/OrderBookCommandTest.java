@@ -6,6 +6,7 @@ import com.my.dao.user.impl.UserDAOImpl;
 import com.my.entities.User;
 import com.my.enums.OrderType;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,9 +20,9 @@ import static org.mockito.Mockito.*;
 public class OrderBookCommandTest {
 
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws ApplicationException, CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        OrderBookCommand orderBookCommand = new OrderBookCommand(daoFactory);
+        OrderBookCommand orderBookCommand = new OrderBookCommand(daoFactory.getUserDAO(),daoFactory.getBookDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO(),daoFactory.getOrderDAO());
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getSession()).thenReturn(mock(HttpSession.class));
@@ -33,9 +34,9 @@ public class OrderBookCommandTest {
     }
 
     @Test
-    public void executeShouldReturnPathIfBookNull() throws ApplicationException {
+    public void executeShouldReturnPathIfBookNull() throws ApplicationException,CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        OrderBookCommand orderBookCommand = new OrderBookCommand(daoFactory);
+        OrderBookCommand orderBookCommand = new OrderBookCommand(daoFactory.getUserDAO(),daoFactory.getBookDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO(),daoFactory.getOrderDAO());
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getSession()).thenReturn(mock(HttpSession.class));

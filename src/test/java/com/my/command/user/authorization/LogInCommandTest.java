@@ -4,6 +4,7 @@ import com.my.dao.DAOFactory;
 import com.my.dao.user.impl.UserDAOImpl;
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,9 +20,9 @@ import static org.mockito.Mockito.when;
 public class LogInCommandTest {
 
     @Test
-    public void executeShouldReturnPathWhenUserNull() throws ApplicationException {
+    public void executeShouldReturnPathWhenUserNull() throws ApplicationException, CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        LogInCommand logInCommand = new LogInCommand(daoFactory);
+        LogInCommand logInCommand = new LogInCommand(daoFactory.getUserDAO());
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getParameter("email")).thenReturn(anyString());
@@ -33,9 +34,9 @@ public class LogInCommandTest {
     }
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws ApplicationException,CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        LogInCommand logInCommand = new LogInCommand(daoFactory);
+        LogInCommand logInCommand = new LogInCommand(daoFactory.getUserDAO());
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getParameter("email")).thenReturn(anyString());
@@ -49,9 +50,9 @@ public class LogInCommandTest {
     }
 
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws ApplicationException,CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        LogInCommand logInCommand = new LogInCommand(daoFactory);
+        LogInCommand logInCommand = new LogInCommand(daoFactory.getUserDAO());
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getParameter("email")).thenReturn(anyString());

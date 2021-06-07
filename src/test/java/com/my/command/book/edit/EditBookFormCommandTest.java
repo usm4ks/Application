@@ -4,6 +4,7 @@ import com.my.dao.DAOFactory;
 import com.my.dao.book.impl.BookDAOImpl;
 import com.my.entities.Book;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,9 +17,9 @@ import static org.mockito.Mockito.when;
 public class EditBookFormCommandTest {
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws ApplicationException, CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        EditBookFormCommand editBookFormCommand = new EditBookFormCommand(daoFactory);
+        EditBookFormCommand editBookFormCommand = new EditBookFormCommand(daoFactory.getBookDAO());
         when(daoFactory.getBookDAO()).thenReturn(mock(BookDAOImpl.class));
         when(daoFactory.getBookDAO().getBookById(1)).thenReturn(new Book());
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -28,9 +29,9 @@ public class EditBookFormCommandTest {
     }
 
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        EditBookFormCommand editBookFormCommand = new EditBookFormCommand(daoFactory);
+        EditBookFormCommand editBookFormCommand = new EditBookFormCommand(daoFactory.getBookDAO());
         when(daoFactory.getBookDAO()).thenReturn(mock(BookDAOImpl.class));
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);

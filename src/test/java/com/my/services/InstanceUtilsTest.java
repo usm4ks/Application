@@ -3,7 +3,7 @@ package com.my.services;
 import com.my.entities.Book;
 import com.my.entities.User;
 import com.my.enums.UserRole;
-import com.my.util.InstanceBuilder;
+import com.my.util.InstanceUtils;
 import org.junit.Test;
 
 import java.sql.ResultSet;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class InstanceBuilderTest {
+public class InstanceUtilsTest {
 
     @Test
     public void buildBookShouldReturnCorrectBook() throws SQLException {
@@ -31,7 +31,7 @@ public class InstanceBuilderTest {
         when(rs.getString("publishing_house")).thenReturn("publishing_house");
         when(rs.getInt("year")).thenReturn(2021);
         when(rs.getInt("amount")).thenReturn(1);
-        assertEquals(book, InstanceBuilder.buildBook(rs,false));
+        assertEquals(book, InstanceUtils.buildBook(rs,false));
     }
 
     @Test
@@ -52,6 +52,6 @@ public class InstanceBuilderTest {
         when(rs.getString("last_name")).thenReturn("lName");
         when(rs.getString("role")).thenReturn("user");
         when(rs.getBoolean("blocked")).thenReturn(false);
-        assertEquals(user, InstanceBuilder.buildUser(rs,false));
+        assertEquals(user, InstanceUtils.buildUser(rs,false));
     }
 }

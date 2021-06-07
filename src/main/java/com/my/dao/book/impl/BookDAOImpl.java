@@ -4,7 +4,7 @@ import com.my.dao.book.BookDAO;
 import com.my.db.DBConnector;
 import com.my.entities.Book;
 import com.my.exception.ApplicationException;
-import com.my.util.InstanceBuilder;
+import com.my.util.InstanceUtils;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -43,13 +43,14 @@ public class BookDAOImpl implements BookDAO {
         this.dbConnector = dbConnector;
     }
 
-
+//get start point
     /**
      * This method return 5 books for every page
      * @param page - number of page
      * if  page <= 0 - methods returns all books from data base
      * @return list of books
      */
+    // int ==> optional<ineteger>
     @Override
     public List<Book> getAllBooks(int page) throws ApplicationException {
         List<Book> bookList = new ArrayList<>();
@@ -66,10 +67,10 @@ public class BookDAOImpl implements BookDAO {
             }
             rs = pst.executeQuery();
             while (rs.next()){
-                bookList.add(InstanceBuilder.buildBook(rs,false));
+                bookList.add(InstanceUtils.buildBook(rs,false));
             }
         } catch (SQLException e) {
-            LOGGER.error("getAllBooks() error",e);
+            LOGGER.error("Get all books failed with error",e);
             throw new ApplicationException("Can't get all books",e);
         } finally {
             dbConnector.close(rs,pst,con);
@@ -95,10 +96,10 @@ public class BookDAOImpl implements BookDAO {
             pst.setInt(1,page*5-5);
             rs = pst.executeQuery();
             while (rs.next()){
-                bookList.add(InstanceBuilder.buildBook(rs,false));
+                bookList.add(InstanceUtils.buildBook(rs,false));
             }
         } catch (SQLException e) {
-            LOGGER.error("getSortedBooks() error",e);
+            LOGGER.error("Get sorted books failed with error",e);
             throw new ApplicationException("Can't get sorted books",e);
         } finally {
             dbConnector.close(rs,pst,con);
@@ -120,10 +121,10 @@ public class BookDAOImpl implements BookDAO {
             pst.setString(2,parameter);
             rs = pst.executeQuery();
             while (rs.next()){
-                bookList.add(InstanceBuilder.buildBook(rs,false));
+                bookList.add(InstanceUtils.buildBook(rs,false));
             }
         } catch (SQLException e) {
-            LOGGER.error("searchBook() error",e);
+            LOGGER.error("Search book failed with error",e);
             throw  new ApplicationException("Can't search book",e);
         } finally {
             dbConnector.close(rs,pst,con);
@@ -143,10 +144,10 @@ public class BookDAOImpl implements BookDAO {
             pst.setInt(1,id);
             rs = pst.executeQuery();
             if (rs.next()){
-                book = InstanceBuilder.buildBook(rs,false);
+                book = InstanceUtils.buildBook(rs,false);
             }
         } catch (SQLException e) {
-            LOGGER.error("getBookById() error",e);
+            LOGGER.error("Get book by id failed with error",e);
             throw new ApplicationException("Can't get book by id",e);
 
         } finally {
@@ -169,10 +170,10 @@ public class BookDAOImpl implements BookDAO {
             pst.setInt(4,year);
             rs = pst.executeQuery();
             if (rs.next()){
-                book = InstanceBuilder.buildBook(rs,false);
+                book = InstanceUtils.buildBook(rs,false);
             }
         } catch (SQLException e) {
-            LOGGER.error("getBookByBookInfo() error",e);
+            LOGGER.error("Get book by book info failed with error",e);
             throw new ApplicationException("Can't get book by id",e);
         }finally {
             dbConnector.close(rs,pst,con);
@@ -215,7 +216,7 @@ public class BookDAOImpl implements BookDAO {
             }
             con.commit();
         } catch (SQLException e) {
-            LOGGER.error("insertBook() error",e);
+            LOGGER.error("Insert book failed with error",e);
             rollBack(con);
             throw new ApplicationException("Can't insert book",e);
         } finally {
@@ -240,7 +241,7 @@ public class BookDAOImpl implements BookDAO {
             pst.executeUpdate();
             con.commit();
         } catch (SQLException e) {
-            LOGGER.error("editBook() error",e);
+            LOGGER.error("Edit book failed with error",e);
             rollBack(con);
             throw new ApplicationException("Can't edit book",e);
         }finally {
@@ -260,7 +261,7 @@ public class BookDAOImpl implements BookDAO {
             pst.executeUpdate();
             con.commit();
         } catch (SQLException e) {
-            LOGGER.error("deleteBook() error",e);
+            LOGGER.error("Delete book failed with error",e);
             throw new ApplicationException("Can't delete book",e);
         }finally {
            dbConnector.close(pst,con);
@@ -281,7 +282,7 @@ public class BookDAOImpl implements BookDAO {
         try {
             connection.rollback();
         } catch (SQLException e) {
-            LOGGER.error("connection.rollback() error",e);
+            LOGGER.error(e);
         }
     }
 

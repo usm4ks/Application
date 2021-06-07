@@ -2,7 +2,7 @@ package com.my.controller;
 
 import com.my.command.CommandConstants;
 import com.my.command.CommandFactory;
-import com.my.util.ControllerHelper;
+import com.my.util.ControllerUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,11 +26,11 @@ public class LogInController extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        ControllerHelper.doPost(req,resp,commandFactory);
+        ControllerUtils.doPost(req,resp,commandFactory);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ControllerHelper.doGet(req,resp,commandFactory,availableCommands);
+        ControllerUtils.doGet(req,resp,commandFactory,availableCommands);
     }
 }

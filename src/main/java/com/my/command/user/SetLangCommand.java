@@ -1,20 +1,15 @@
 package com.my.command.user;
 
 import com.my.command.Command;
-import com.my.dao.DAOFactory;
-import com.my.exception.ApplicationException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class SetLangCommand extends Command {
-    public SetLangCommand(DAOFactory daoFactory) {
-        super(daoFactory);
-    }
+public class SetLangCommand implements Command {
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ApplicationException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String lang = request.getParameter("lang");
         request.getSession().setAttribute("lang",lang);
         if (request.getSession().getAttribute("user") == null){

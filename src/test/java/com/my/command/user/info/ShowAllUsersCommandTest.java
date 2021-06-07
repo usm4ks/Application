@@ -4,6 +4,7 @@ import com.my.dao.DAOFactory;
 import com.my.dao.user.impl.UserDAOImpl;
 import com.my.enums.UserRole;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,9 +19,9 @@ import static org.mockito.Mockito.when;
 public class ShowAllUsersCommandTest {
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws CommandException,ApplicationException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowAllUsersCommand showAllUsersCommand = new ShowAllUsersCommand(daoFactory);
+        ShowAllUsersCommand showAllUsersCommand = new ShowAllUsersCommand(daoFactory.getUserDAO());
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         when(daoFactory.getUserDAO().getAllUsersByRole(UserRole.USER.getRoleName())).thenReturn(new ArrayList<>());
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -28,9 +29,9 @@ public class ShowAllUsersCommandTest {
         Assert.assertEquals("/WEB-INF/views/user_list.jsp",showAllUsersCommand.execute(request,response));
     }
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws CommandException,ApplicationException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowAllUsersCommand showAllUsersCommand = new ShowAllUsersCommand(daoFactory);
+        ShowAllUsersCommand showAllUsersCommand = new ShowAllUsersCommand(daoFactory.getUserDAO());
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         when(daoFactory.getUserDAO().getAllUsersByRole(UserRole.USER.getRoleName())).thenThrow(ApplicationException.class);
         HttpServletRequest request = mock(HttpServletRequest.class);

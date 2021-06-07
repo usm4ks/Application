@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 
-public class InstanceBuilder {
+public class InstanceUtils {
 
-    private InstanceBuilder() {}
+    private InstanceUtils() {}
 
     public static Book buildBook(ResultSet rs, Boolean isComplex) throws SQLException {
         Book book = new Book();

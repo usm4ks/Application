@@ -4,7 +4,7 @@ import com.my.dao.user.UserDAO;
 import com.my.db.DBConnector;
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
-import com.my.util.InstanceBuilder;
+import com.my.util.InstanceUtils;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -48,7 +48,7 @@ public class UserDAOImpl implements UserDAO {
             }
             con.commit();
         } catch (SQLException e) {
-            LOGGER.error("registrationUser() error",e);
+            LOGGER.error("Registration user failed with error",e);
             rollBack(con);
             throw new ApplicationException("Can't registration user",e);
         } finally {
@@ -68,10 +68,10 @@ public class UserDAOImpl implements UserDAO {
             pst.setString(1,email);
             rs = pst.executeQuery();
             if (rs.next()){
-                user = InstanceBuilder.buildUser(rs,false);
+                user = InstanceUtils.buildUser(rs,false);
             }
         } catch (SQLException e) {
-            LOGGER.error("getUserByEmail() error",e);
+            LOGGER.error("Get user by email failed with error",e);
             throw new ApplicationException("Can't get user by email",e);
         } finally {
             dbConnector.close(rs,pst,con);
@@ -90,10 +90,10 @@ public class UserDAOImpl implements UserDAO {
             pst.setInt(1,id);
             rs = pst.executeQuery();
             if (rs.next()){
-                user = InstanceBuilder.buildUser(rs,false);
+                user = InstanceUtils.buildUser(rs,false);
             }
         } catch (SQLException e) {
-            LOGGER.error("getUserById() error",e);
+            LOGGER.error("Get user by id failed with error",e);
             throw new ApplicationException("Can't get user by id",e);
         }finally {
            dbConnector.close(rs,pst,con);
@@ -113,10 +113,10 @@ public class UserDAOImpl implements UserDAO {
             pst.setString(1,role);
             rs = pst.executeQuery();
             while (rs.next()){
-                userList.add(InstanceBuilder.buildUser(rs,false));
+                userList.add(InstanceUtils.buildUser(rs,false));
             }
         } catch (SQLException e) {
-            LOGGER.error("getAllUsersByRole() error",e);
+            LOGGER.error("Get all users by role failed with error",e);
             throw new ApplicationException("Can't get all users by role",e);
         }finally {
             dbConnector.close(rs,pst,con);
@@ -137,7 +137,7 @@ public class UserDAOImpl implements UserDAO {
             pst.executeUpdate();
             con.commit();
         } catch (SQLException e) {
-            LOGGER.error("changeBlockStatusUserById() error",e);
+            LOGGER.error("Change block status of user failed with error",e);
             rollBack(con);
             throw new ApplicationException("Can't change user block status",e);
         }finally {
@@ -157,7 +157,7 @@ public class UserDAOImpl implements UserDAO {
             pst.executeUpdate();
             con.commit();
         } catch (SQLException e) {
-            LOGGER.error("changeRoleUserById() error",e);
+            LOGGER.error("Change user role failed with error",e);
             rollBack(con);
             throw new ApplicationException("Can't change user role",e);
         }finally {
@@ -170,7 +170,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection.rollback();
         } catch (SQLException e) {
-            LOGGER.error("rollback() error",e);
+            LOGGER.error(e);
         }
     }
 }

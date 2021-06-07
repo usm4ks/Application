@@ -5,6 +5,7 @@ import com.my.dao.order.impl.OrderDAOImpl;
 import com.my.entities.User;
 import com.my.enums.UserRole;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,9 +21,9 @@ public class ShowAccountCommandTest {
 
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws ApplicationException, CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowAccountCommand showAccountCommand = new ShowAccountCommand(daoFactory);
+        ShowAccountCommand showAccountCommand = new ShowAccountCommand(daoFactory.getOrderDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO());
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getSession()).thenReturn(mock(HttpSession.class));
@@ -33,9 +34,9 @@ public class ShowAccountCommandTest {
     }
 
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws ApplicationException,CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        ShowAccountCommand showAccountCommand = new ShowAccountCommand(daoFactory);
+        ShowAccountCommand showAccountCommand = new ShowAccountCommand(daoFactory.getOrderDAO(),daoFactory.getBookOnTicketDAO(), daoFactory.getBookInHallDAO());
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getSession()).thenReturn(mock(HttpSession.class));

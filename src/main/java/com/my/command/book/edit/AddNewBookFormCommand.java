@@ -1,17 +1,11 @@
 package com.my.command.book.edit;
 
 import com.my.command.Command;
-import com.my.dao.DAOFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AddNewBookFormCommand extends Command {
-
-
-    public AddNewBookFormCommand(DAOFactory daoFactory) {
-        super(daoFactory);
-    }
+public class AddNewBookFormCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

@@ -1,6 +1,6 @@
 package com.my.exception;
 
-public class ApplicationException extends Exception{
+public class CommandException extends Exception {
 
     private final String message;
     private final Throwable exception;
@@ -13,7 +13,7 @@ public class ApplicationException extends Exception{
         return exception;
     }
 
-    public ApplicationException(String message, Throwable exception) {
+    public CommandException(String message, Throwable exception) {
         this.message = message;
         this.exception = exception;
     }

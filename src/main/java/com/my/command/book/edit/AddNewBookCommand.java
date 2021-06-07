@@ -1,39 +1,42 @@
 package com.my.command.book.edit;
 
 import com.my.command.Command;
-import com.my.dao.DAOFactory;
+import com.my.dao.book.BookDAO;
 import com.my.entities.Book;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AddNewBookCommand extends Command {
+public class AddNewBookCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(AddNewBookCommand.class);
 
-    public AddNewBookCommand(DAOFactory daoFactory) {
-        super(daoFactory);
+    private final BookDAO bookDAO;
+
+    public AddNewBookCommand(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
     }
 
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ApplicationException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         Book book = new Book();
         book.setTitle(request.getParameter("title"));
         book.setAuthor(request.getParameter("author"));
         book.setPublishingHouse(request.getParameter("publishing_house"));
         book.setYear(Integer.parseInt(request.getParameter("year")));
         book.setAmount(Integer.parseInt(request.getParameter("amount")));
-        if (daoFactory.getBookDAO().getBookByBookInfo(book.getTitle(), book.getAuthor(), book.getPublishingHouse(), book.getYear()) != null){
-            throw new ApplicationException("This book already exists",new Exception());
-        }
         try {
-            daoFactory.getBookDAO().insertBook(book);
+            if (bookDAO.getBookByBookInfo(book.getTitle(), book.getAuthor(), book.getPublishingHouse(), book.getYear()) != null){
+                throw new CommandException("This book already exists",new Exception());
+            }
+            bookDAO.insertBook(book);
         } catch (ApplicationException e) {
             LOGGER.error(e);
-            throw new ApplicationException("Can't add new book",e);
+            throw new CommandException("Can't add new book",e);
         }
         return "book_list?command=show_all_books";
     }

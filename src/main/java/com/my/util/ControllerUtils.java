@@ -3,6 +3,7 @@ package com.my.util;
 import com.my.command.Command;
 import com.my.command.CommandFactory;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -11,19 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
-public class ControllerHelper {
+public class ControllerUtils {
 
     private static final String COMMAND = "command";
-    private static final Logger LOGGER = Logger.getLogger(ControllerHelper.class);
+    private static final Logger LOGGER = Logger.getLogger(ControllerUtils.class);
 
-    private ControllerHelper() {}
+    private ControllerUtils() {}
 
     public static void doPost(HttpServletRequest req, HttpServletResponse resp, CommandFactory commandFactory) throws IOException, ServletException {
         String stringCommand = req.getParameter(COMMAND);
         Command command = commandFactory.getCommand(stringCommand);
         try {
             resp.sendRedirect(command.execute(req,resp));
-        } catch (ApplicationException e) {
+        } catch (CommandException e) {
             LOGGER.error(e);
             req.setAttribute("error_message",e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req,resp);
@@ -38,7 +39,7 @@ public class ControllerHelper {
         Command command = commandFactory.getCommand(stringCommand);
         try {
             req.getRequestDispatcher(command.execute(req,resp)).forward(req,resp);
-        } catch (ApplicationException e) {
+        } catch (CommandException e) {
             LOGGER.error(e);
             req.setAttribute("error_message",e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req,resp);

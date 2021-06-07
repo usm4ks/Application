@@ -11,7 +11,7 @@ import java.sql.*;
 public class DBConnector {
 
     private static final Logger LOGGER = Logger.getLogger(DBConnector.class);
-    private static final String CLOSE_ERROR = "close() error";
+    private static final String CLOSE_ERROR = "Close failed with error";
 
 
     private DBConnector(){
@@ -33,7 +33,7 @@ public class DBConnector {
             DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/TestDB");
             c = ds.getConnection();
         } catch (NamingException | SQLException e) {
-            LOGGER.error("getConnection() error",e);
+            LOGGER.error("Get connection failed with error",e);
             throw new RuntimeException();
         }
         return c;

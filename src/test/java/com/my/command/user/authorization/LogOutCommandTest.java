@@ -17,7 +17,7 @@ public class LogOutCommandTest {
     @Test
     public void executeShouldReturnPath() throws ApplicationException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        LogOutCommand logOutCommand = new LogOutCommand(daoFactory);
+        LogOutCommand logOutCommand = new LogOutCommand();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getSession()).thenReturn(mock(HttpSession.class));

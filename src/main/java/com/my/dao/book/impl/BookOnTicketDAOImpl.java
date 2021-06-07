@@ -4,7 +4,7 @@ import com.my.dao.book.BookOnTicketDAO;
 import com.my.db.DBConnector;
 import com.my.entities.BookOnTicket;
 import com.my.exception.ApplicationException;
-import com.my.util.InstanceBuilder;
+import com.my.util.InstanceUtils;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -64,11 +64,11 @@ public class BookOnTicketDAOImpl implements BookOnTicketDAO {
                 bookOnTicketList.add(createBookOnTicket(rs));
             }
         } catch (SQLException e) {
-            LOGGER.error("getAllBooksOnUserTicket() error",e);
+            LOGGER.error("Get all books on user ticket failed with error",e);
             try {
                 con.rollback();
             } catch (SQLException exception) {
-                LOGGER.error("con.rollback() error",exception);
+                LOGGER.error(exception);
             }
             throw new ApplicationException("Can't get all books on user ticket",e);
         }finally {
@@ -109,7 +109,7 @@ public class BookOnTicketDAOImpl implements BookOnTicketDAO {
                 bookOnTicket = createBookOnTicket(rs);
             }
         } catch (SQLException e) {
-            LOGGER.error("getBookOnUserTicket() error",e);
+            LOGGER.error("Get book on user ticket failed with error",e);
             throw new ApplicationException("Can't get book on user ticket",e);
         }finally {
             dbConnector.close(rs,pst,con);
@@ -132,7 +132,7 @@ public class BookOnTicketDAOImpl implements BookOnTicketDAO {
                 bookOnTicketList.add(createBookOnTicket(rs));
             }
         } catch (SQLException e) {
-            LOGGER.error("getBookOnTicketByBookId() error",e);
+            LOGGER.error("Get book on ticket by book id failed with error",e);
             throw new ApplicationException("Can't get book on users tickets",e);
         }finally {
             dbConnector.close(rs,pst,con);
@@ -143,8 +143,8 @@ public class BookOnTicketDAOImpl implements BookOnTicketDAO {
 
     private BookOnTicket createBookOnTicket(ResultSet rs) throws SQLException {
         BookOnTicket bookOnTicket = new BookOnTicket();
-        bookOnTicket.setBook(InstanceBuilder.buildBook(rs,true));
-        bookOnTicket.setUser(InstanceBuilder.buildUser(rs,true));
+        bookOnTicket.setBook(InstanceUtils.buildBook(rs,true));
+        bookOnTicket.setUser(InstanceUtils.buildUser(rs,true));
         bookOnTicket.setUntilDate(rs.getDate("until_date"));
         bookOnTicket.setFine(rs.getInt("fine"));
         return bookOnTicket;

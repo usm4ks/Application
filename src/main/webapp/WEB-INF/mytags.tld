@@ -10,16 +10,9 @@
     <short-name>simple</short-name>
     <uri>http://tomcat.apache.org/taglib</uri>
 
-    <tag>
-        <name>blockStatus</name>
-        <tag-class>com.my.tags.BlockStatus</tag-class>
-        <attribute>
-            <name>status</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-    </tag>
+
     <tag>
         <name>dateValue</name>
-        <tag-class>com.my.tags.DateValue</tag-class>
+        <tag-class>com.my.tags.DateTag</tag-class>
     </tag>
 </taglib>

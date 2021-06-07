@@ -4,6 +4,7 @@ import com.my.dao.DAOFactory;
 import com.my.dao.user.impl.UserDAOImpl;
 import com.my.entities.User;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,9 +18,9 @@ import static org.mockito.Mockito.when;
 public class RegistrationCommandTest {
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws ApplicationException, CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        RegistrationCommand registrationCommand = new RegistrationCommand(daoFactory);
+        RegistrationCommand registrationCommand = new RegistrationCommand(daoFactory.getUserDAO());
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         when(daoFactory.getUserDAO().getUserByEmail(anyString())).thenReturn(mock(User.class));
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -32,9 +33,9 @@ public class RegistrationCommandTest {
         Assert.assertEquals("registration",registrationCommand.execute(request,response));
     }
     @Test
-    public void executeShouldReturnPathIfUserNull() throws ApplicationException {
+    public void executeShouldReturnPathIfUserNull() throws ApplicationException,CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        RegistrationCommand registrationCommand = new RegistrationCommand(daoFactory);
+        RegistrationCommand registrationCommand = new RegistrationCommand(daoFactory.getUserDAO());
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         when(daoFactory.getUserDAO().getUserByEmail(anyString())).thenReturn(null);
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -48,9 +49,9 @@ public class RegistrationCommandTest {
     }
 
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws ApplicationException,CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        RegistrationCommand registrationCommand = new RegistrationCommand(daoFactory);
+        RegistrationCommand registrationCommand = new RegistrationCommand(daoFactory.getUserDAO());
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);

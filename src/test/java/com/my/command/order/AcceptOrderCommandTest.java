@@ -7,6 +7,7 @@ import com.my.dao.order.impl.OrderDAOImpl;
 import com.my.db.DBConnector;
 import com.my.enums.OrderType;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import com.my.services.OrderBookService;
 import org.junit.*;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +18,9 @@ import static org.mockito.Mockito.*;
 public class AcceptOrderCommandTest {
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws ApplicationException, CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        AcceptOrderCommand acceptOrderCommand = new AcceptOrderCommand(daoFactory);
+        AcceptOrderCommand acceptOrderCommand = new AcceptOrderCommand();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getParameter("bookId")).thenReturn("1");
@@ -36,9 +37,9 @@ public class AcceptOrderCommandTest {
     }
 
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws ApplicationException,CommandException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        AcceptOrderCommand acceptOrderCommand = new AcceptOrderCommand(daoFactory);
+        AcceptOrderCommand acceptOrderCommand = new AcceptOrderCommand();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getParameter("bookId")).thenReturn("1");

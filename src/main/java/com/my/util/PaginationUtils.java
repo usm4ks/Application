@@ -4,10 +4,9 @@ import com.my.exception.ApplicationException;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class PaginationHelper {
+public class PaginationUtils {
 
-
-    private PaginationHelper(){}
+    private PaginationUtils(){}
 
     public static int getPage(HttpServletRequest request) throws ApplicationException {
         String pageNum = request.getParameter("page");

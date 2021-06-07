@@ -4,6 +4,7 @@ import com.my.dao.DAOFactory;
 import com.my.dao.user.impl.UserDAOImpl;
 import com.my.enums.UserRole;
 import com.my.exception.ApplicationException;
+import com.my.exception.CommandException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,9 +20,9 @@ public class LibrarianSettingsCommandTest {
 
 
     @Test
-    public void executeShouldReturnPath() throws ApplicationException {
+    public void executeShouldReturnPath() throws CommandException,ApplicationException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        LibrarianSettingsCommand librarianSettingsCommand = new LibrarianSettingsCommand(daoFactory);
+        LibrarianSettingsCommand librarianSettingsCommand = new LibrarianSettingsCommand(daoFactory.getUserDAO());
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         when(daoFactory.getUserDAO().getAllUsersByRole(UserRole.LIBRARIAN.getRoleName())).thenReturn(new ArrayList<>());
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -30,9 +31,9 @@ public class LibrarianSettingsCommandTest {
     }
 
     @Test(expected = ApplicationException.class)
-    public void executeShouldThrowException() throws ApplicationException {
+    public void executeShouldThrowException() throws CommandException,ApplicationException {
         DAOFactory daoFactory = mock(DAOFactory.class);
-        LibrarianSettingsCommand librarianSettingsCommand = new LibrarianSettingsCommand(daoFactory);
+        LibrarianSettingsCommand librarianSettingsCommand = new LibrarianSettingsCommand(daoFactory.getUserDAO());
         when(daoFactory.getUserDAO()).thenReturn(mock(UserDAOImpl.class));
         when(daoFactory.getUserDAO().getAllUsersByRole(UserRole.LIBRARIAN.getRoleName())).thenThrow(mock(ApplicationException.class));
         HttpServletRequest request = mock(HttpServletRequest.class);

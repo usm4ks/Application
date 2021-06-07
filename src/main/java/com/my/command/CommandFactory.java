@@ -37,37 +37,37 @@ public class CommandFactory {
     }
 
     private void init() {
-        commands.put(CommandConstants.SHOW_ALL_BOOKS, new ShowAllBooksCommand(daoFactory));
-        commands.put(CommandConstants.REGISTRATION, new RegistrationCommand(daoFactory));
-        commands.put(CommandConstants.LOG_IN, new LogInCommand(daoFactory));
-        commands.put(CommandConstants.LOG_OUT, new LogOutCommand(daoFactory));
-        commands.put(CommandConstants.SEARCH_BOOK, new SearchBookCommand(daoFactory));
-        commands.put(CommandConstants.SHOW_SORTED_BOOKS, new ShowSortedBooks(daoFactory));
-        commands.put(CommandConstants.ACCOUNT, new ShowAccountCommand(daoFactory));
-        commands.put(CommandConstants.ORDER_BOOK, new OrderBookCommand(daoFactory));
-        commands.put(CommandConstants.SHOW_ALL_ORDERS, new ShowAllOrdersCommand(daoFactory));
-        commands.put(CommandConstants.SHOW_ALL_USERS, new ShowAllUsersCommand(daoFactory));
-        commands.put(CommandConstants.SHOW_USER_INFO, new ShowUserInfoCommand(daoFactory));
-        commands.put(CommandConstants.ACCEPT_ORDER_BOOK, new AcceptOrderCommand(daoFactory));
-        commands.put(CommandConstants.USERS_SETTINGS, new UsersSettingsCommand(daoFactory));
-        commands.put(CommandConstants.UNBLOCK_USER, new UnblockUserCommand(daoFactory));
-        commands.put(CommandConstants.BLOCK_USER, new BlockUserCommand(daoFactory));
-        commands.put(CommandConstants.LIBRARIANS_SETTINGS, new LibrarianSettingsCommand(daoFactory));
-        commands.put(CommandConstants.ADD_LIBRARIAN, new AddLibrarianCommand(daoFactory));
-        commands.put(CommandConstants.DELETE_LIBRARIAN, new DeleteLibrarianCommand(daoFactory));
-        commands.put(CommandConstants.EDIT_BOOK_FORM, new EditBookFormCommand(daoFactory));
-        commands.put(CommandConstants.EDIT_BOOK, new EditBookCommand(daoFactory));
-        commands.put(CommandConstants.ADD_NEW_BOOK_FORM, new AddNewBookFormCommand(daoFactory));
-        commands.put(CommandConstants.ADD_NEW_BOOK, new AddNewBookCommand(daoFactory));
-        commands.put(CommandConstants.DELETE_BOOK, new DeleteBookCommand(daoFactory));
-        commands.put(CommandConstants.SET_LANG, new SetLangCommand(daoFactory));
+        commands.put(CommandConstants.SHOW_ALL_BOOKS, new ShowAllBooksCommand(daoFactory.getBookDAO()));
+        commands.put(CommandConstants.REGISTRATION, new RegistrationCommand(daoFactory.getUserDAO()));
+        commands.put(CommandConstants.LOG_IN, new LogInCommand(daoFactory.getUserDAO()));
+        commands.put(CommandConstants.LOG_OUT, new LogOutCommand());
+        commands.put(CommandConstants.SEARCH_BOOK, new SearchBookCommand(daoFactory.getBookDAO()));
+        commands.put(CommandConstants.SHOW_SORTED_BOOKS, new ShowSortedBooks(daoFactory.getBookDAO()));
+        commands.put(CommandConstants.ACCOUNT, new ShowAccountCommand(daoFactory.getOrderDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO()));
+        commands.put(CommandConstants.ORDER_BOOK, new OrderBookCommand(daoFactory.getUserDAO(),daoFactory.getBookDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO(),daoFactory.getOrderDAO()));
+        commands.put(CommandConstants.SHOW_ALL_ORDERS, new ShowAllOrdersCommand(daoFactory.getOrderDAO()));
+        commands.put(CommandConstants.SHOW_ALL_USERS, new ShowAllUsersCommand(daoFactory.getUserDAO()));
+        commands.put(CommandConstants.SHOW_USER_INFO, new ShowUserInfoCommand(daoFactory.getUserDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO()));
+        commands.put(CommandConstants.ACCEPT_ORDER_BOOK, new AcceptOrderCommand());
+        commands.put(CommandConstants.USERS_SETTINGS, new UsersSettingsCommand(daoFactory.getUserDAO()));
+        commands.put(CommandConstants.UNBLOCK_USER, new UnblockUserCommand(daoFactory.getUserDAO()));
+        commands.put(CommandConstants.BLOCK_USER, new BlockUserCommand(daoFactory.getUserDAO()));
+        commands.put(CommandConstants.LIBRARIANS_SETTINGS, new LibrarianSettingsCommand(daoFactory.getUserDAO()));
+        commands.put(CommandConstants.ADD_LIBRARIAN, new AddLibrarianCommand(daoFactory.getUserDAO()));
+        commands.put(CommandConstants.DELETE_LIBRARIAN, new DeleteLibrarianCommand(daoFactory.getUserDAO()));
+        commands.put(CommandConstants.EDIT_BOOK_FORM, new EditBookFormCommand(daoFactory.getBookDAO()));
+        commands.put(CommandConstants.EDIT_BOOK, new EditBookCommand(daoFactory.getBookDAO()));
+        commands.put(CommandConstants.ADD_NEW_BOOK_FORM, new AddNewBookFormCommand());
+        commands.put(CommandConstants.ADD_NEW_BOOK, new AddNewBookCommand(daoFactory.getBookDAO()));
+        commands.put(CommandConstants.DELETE_BOOK, new DeleteBookCommand(daoFactory.getBookDAO(),daoFactory.getBookOnTicketDAO(),daoFactory.getBookInHallDAO()));
+        commands.put(CommandConstants.SET_LANG, new SetLangCommand());
     }
 
     public  Command getCommand(String command){
        Command c = commands.get(command);
        if (c == null){
            LOGGER.error("Command not found");
-           return new ShowAllBooksCommand(daoFactory);
+           return new ShowAllBooksCommand(daoFactory.getBookDAO());
        }
        return c;
     }
