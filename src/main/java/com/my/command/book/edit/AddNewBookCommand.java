@@ -24,7 +24,8 @@ public class AddNewBookCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         Book book = new Book();
-        book.setTitle(request.getParameter("title"));
+        String title = request.getParameter("title");
+        book.setTitle(title);
         book.setAuthor(request.getParameter("author"));
         book.setPublishingHouse(request.getParameter("publishing_house"));
         book.setYear(Integer.parseInt(request.getParameter("year")));
@@ -38,6 +39,7 @@ public class AddNewBookCommand implements Command {
             LOGGER.error(e);
             throw new CommandException("Can't add new book",e);
         }
+        request.getSession().setAttribute("add_result","new_book_was_added");
         return "book_list?command=show_all_books";
     }
 }

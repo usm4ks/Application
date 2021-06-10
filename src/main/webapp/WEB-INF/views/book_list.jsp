@@ -27,9 +27,23 @@
 </div>
 <c:if test="${requestScope.search_result != null}">
     <h5><fmt:message key="${requestScope.search_result}"/></h5>
+    <c:remove var="search_result" scope="session" />
 </c:if>
 <c:if test="${sessionScope.order_result != null}">
     <h5><fmt:message key="${sessionScope.order_result}"/></h5>
+    <c:remove var="order_result" scope="session" />
+</c:if>
+<c:if test="${sessionScope.edit_result != null}">
+    <h5><fmt:message key="${sessionScope.edit_result}"/></h5>
+    <c:remove var="edit_result" scope="session" />
+</c:if>
+<c:if test="${sessionScope.add_result != null}">
+    <h5><fmt:message key="${sessionScope.add_result}"/></h5>
+    <c:remove var="add_result" scope="session" />
+</c:if>
+<c:if test="${sessionScope.delete_result != null}">
+    <h5><fmt:message key="${sessionScope.delete_result}"/></h5>
+    <c:remove var="delete_result" scope="session" />
 </c:if>
 <ul class="list-group list-group-flush">
         <c:forEach var="book" items="${requestScope.book_list}">

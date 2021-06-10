@@ -13,6 +13,7 @@
 <h:header/>
 <c:if test="${sessionScope.block_result != null}">
     <h5><fmt:message key="${sessionScope.block_result}"/></h5>
+    <c:remove var="block_result" scope="session" />
 </c:if>
 <form class="d-flex" id="search_book" method="post" action="account?command=block_user">
     <label>

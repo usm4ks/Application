@@ -14,6 +14,7 @@
 <h2 style="text-decoration-style: inherit"><fmt:message key="registration_form"/>:</h2>
 <c:if test="${sessionScope.registration_result != null}">
     <h5 style="color: red">${sessionScope.registration_result}</h5>
+    <c:remove var="registration_result" scope="session" />
 </c:if>
 <form class="row g-3 needs-validation" method="post" action="registration?command=registration">
     <div class="col-md-4">

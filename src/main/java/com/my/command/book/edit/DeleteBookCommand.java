@@ -38,8 +38,14 @@ public class DeleteBookCommand implements Command {
             Book book = bookDAO.getBookById(bookId);
             List<BookInHall> bookInHallList = bookInHallDAO.getBookInHallByBookId(bookId);
             List<BookOnTicket> bookOnTicketList = bookOnTicketDAO.getBookOnTicketByBookId(bookId);
-            if (book != null && bookOnTicketList.isEmpty() && bookInHallList.isEmpty()) {
+            if (book == null){
+                throw new CommandException("Such book doesn't exist", new Exception());
+            }
+            if (bookOnTicketList.isEmpty() && bookInHallList.isEmpty()) {
                 bookDAO.deleteBook(bookId);
+                request.getSession().setAttribute("delete_result", "book_was_deleted");
+            } else {
+                request.getSession().setAttribute("delete_result", "book_cant_be_deleted");
             }
         } catch (ApplicationException e) {
             LOGGER.error(e);

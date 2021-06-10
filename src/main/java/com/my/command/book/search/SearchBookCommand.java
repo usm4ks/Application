@@ -23,9 +23,6 @@ public class SearchBookCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        if (null != request.getSession().getAttribute("order_result")){
-            request.getSession().removeAttribute("order_result");
-        }
         String s = request.getParameter("search");
         try {
             List<Book> books = bookDAO.searchBook(s);

@@ -13,6 +13,7 @@
 <h:header/>
 <c:if test="${sessionScope.add_result != null}">
     <h5><fmt:message key="${sessionScope.add_result}"/></h5>
+    <c:remove var="add_result" scope="session" />
 </c:if>
 <form class="d-flex" id="search_book" method="post" action="account?command=add_librarian">
     <label>

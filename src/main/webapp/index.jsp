@@ -15,6 +15,7 @@
 <h2 class="html-editor-align-center"><fmt:message key="welcome"/></h2>
 <c:if test="${sessionScope.log_in_result != null}">
     <h5 style="color: red">${sessionScope.log_in_result}</h5>
+    <c:remove var="log_in_result" scope="session" />
 </c:if>
 <form action="log_in?command=log_in" method="post" class="row g-3 needs-validation" >
     <div class="col-md-4">
