@@ -125,7 +125,5 @@ INSERT INTO users(email, password, first_name, last_name, role)
 VALUES ('semenov@gmail.com', 'e0e13965e1a36945c02a57f9950cf21b', 'Semen', 'Semenov', 'librarian');
 INSERT INTO users(email, password, first_name, last_name, role)
 VALUES ('filipov@gmail.com', 'dddf2aa7de019716976a0b76c83fbf67', 'Filip', 'Filipov', 'admin');
-select *
-from books;
 INSERT INTO users(email, password, first_name, last_name)
 VALUES ('sidorenko@gmail.com', '6023a539290e1811d63a93bfab6ffa90', 'Сидоренко', 'Маргарига');
