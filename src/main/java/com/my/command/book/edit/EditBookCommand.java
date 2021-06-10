@@ -35,7 +35,7 @@ public class EditBookCommand implements Command {
             LOGGER.error(e);
             throw new CommandException("Can't edit book",e);
         }
-        request.getSession().setAttribute("edit_result","book_was_changed" );
+        request.getSession().setAttribute("edit_result","book_was_changed");
         return "book_list?command=show_all_books";
     }
 }
