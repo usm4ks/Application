@@ -16,4 +16,5 @@ public interface BookOnTicketDAO {
     void addBookOnUserTicket(Connection connection, int userId, int bookId, Date date) throws SQLException;
     BookOnTicket getBookOnUserTicket(int userId,int bookId) throws ApplicationException;
     List<BookOnTicket> getBookOnTicketByBookId(int bookId) throws ApplicationException;
+    void updateFine();
 }

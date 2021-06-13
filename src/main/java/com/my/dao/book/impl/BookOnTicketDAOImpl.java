@@ -7,10 +7,7 @@ import com.my.exception.ApplicationException;
 import com.my.util.InstanceUtils;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +28,7 @@ public class BookOnTicketDAOImpl implements BookOnTicketDAO {
             "blocked,book_id,title,author,publishing_house,year,amount,until_date,fine " +
             " FROM books_on_ticket JOIN books b ON b.id = books_on_ticket.book_id " +
             "JOIN users u ON books_on_ticket.user_id = u.id WHERE book_id=?";
-    private static final String UPDATE_FINE_WHERE_UNTIL_DATE_BEFORE_CURRENT="UPDATE books_on_ticket SET fine=50 WHERE until_date<current_date AND fine=0 AND user_id=?";
+    private static final String UPDATE_FINE_WHERE_UNTIL_DATE_BEFORE_CURRENT="UPDATE books_on_ticket SET fine=50 WHERE until_date<current_date AND fine=0";
 
     private static final Logger LOGGER = Logger.getLogger(BookOnTicketDAOImpl.class);
 
@@ -47,15 +44,11 @@ public class BookOnTicketDAOImpl implements BookOnTicketDAO {
     public List<BookOnTicket> getAllBooksOnUserTicket(int userId) throws ApplicationException {
         Connection con = null;
         PreparedStatement pst = null;
-        PreparedStatement pst2 = null;
         ResultSet rs = null;
         List<BookOnTicket> bookOnTicketList = new ArrayList<>();
         try{
             con = dbConnector.getConnection();
             con.setAutoCommit(false);
-            pst2 = con.prepareStatement(UPDATE_FINE_WHERE_UNTIL_DATE_BEFORE_CURRENT);
-            pst2.setInt(1,userId);
-            pst2.executeUpdate();
             con.commit();
             pst = con.prepareStatement(SELECT_ALL_FROM_BOOKS_ON_TICKET_BY_USER_ID);
             pst.setInt(1,userId);
@@ -71,15 +64,8 @@ public class BookOnTicketDAOImpl implements BookOnTicketDAO {
                 LOGGER.error(exception);
             }
             throw new ApplicationException("Can't get all books on user ticket",e);
-        }finally {
-            dbConnector.close(rs,pst,con);
-            if (pst2 != null) {
-                try {
-                    pst2.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e);
-                }
-            }
+        } finally {
+            dbConnector.close(rs, pst, con);
         }
         return bookOnTicketList;
     }
@@ -138,6 +124,28 @@ public class BookOnTicketDAOImpl implements BookOnTicketDAO {
             dbConnector.close(rs,pst,con);
         }
         return bookOnTicketList;
+    }
+
+    @Override
+    public void updateFine(){
+        Connection con = null;
+        Statement st = null;
+        try{
+            con = dbConnector.getConnection();
+            con.setAutoCommit(false);
+            st = con.createStatement();
+            st.executeUpdate(UPDATE_FINE_WHERE_UNTIL_DATE_BEFORE_CURRENT);
+            con.commit();
+        } catch (SQLException e) {
+            try {
+                con.rollback();
+            } catch (SQLException exception) {
+                LOGGER.error("Roll back failed with error",exception);
+            }
+            LOGGER.error("Update fine failed with error",e);
+        } finally {
+            dbConnector.close(st,con);
+        }
     }
 
 

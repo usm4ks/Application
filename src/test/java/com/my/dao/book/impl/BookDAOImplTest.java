@@ -59,4 +59,19 @@ public class BookDAOImplTest {
         assertEquals(0, daoFactory.getBookDAO().searchBook("abc").size());
     }
 
+    @Test
+    public void getBookByInfoShouldReturnNullIfBookNotFound() throws SQLException, ApplicationException {
+        //given
+        DAOFactory daoFactory = new DAOFactory(dbConnector);
+
+        //when
+        when(dbConnector.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(pst);
+        when(pst.executeQuery()).thenReturn(rs);
+        when(rs.next()).thenReturn(false);
+
+        //then
+        assertNull(daoFactory.getBookDAO().getBookByBookInfo("title","author","publ_house",2011));
+    }
+
 }
