@@ -40,7 +40,7 @@ public class RegistrationCommand implements Command {
             if (userFromDB == null) {
                 userDAO.registrationUser(user);
                 request.getSession().setAttribute("user", user);
-                return "book_list?command=show_all_books&page=1";
+                return "book_list?command=show_all_books";
             }
         } catch (ApplicationException e) {
             LOGGER.error(e);

@@ -62,7 +62,7 @@ public class LogInCommandTest {
         when(userDAO.getUserByEmail(anyString())).thenReturn(user);
 
         //then
-        assertEquals("book_list?command=show_all_books&page=1",logInCommand.execute(request,response));
+        assertEquals("book_list?command=show_all_books",logInCommand.execute(request,response));
     }
 
     @Test(expected = CommandException.class)

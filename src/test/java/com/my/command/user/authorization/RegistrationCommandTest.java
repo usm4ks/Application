@@ -61,7 +61,7 @@ public class RegistrationCommandTest {
         when(request.getSession()).thenReturn(session);
 
         //then
-        assertEquals("book_list?command=show_all_books&page=1",registrationCommand.execute(request,response));
+        assertEquals("book_list?command=show_all_books",registrationCommand.execute(request,response));
     }
 
     @Test(expected = CommandException.class)

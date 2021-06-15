@@ -34,7 +34,7 @@ public class LogInCommand implements Command {
         }
         if (user != null && user.getPassword().equals(DigestUtils.md5Hex(password))) {
             request.getSession().setAttribute("user",user);
-            return "book_list?command=show_all_books&page=1";
+            return "book_list?command=show_all_books";
         }
         request.getSession().setAttribute("log_in_result","Incorrect email or password");
         return "index.jsp";

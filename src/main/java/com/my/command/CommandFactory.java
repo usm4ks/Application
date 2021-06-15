@@ -20,13 +20,10 @@ import com.my.command.user.settings.BlockUserCommand;
 import com.my.command.user.settings.UnblockUserCommand;
 import com.my.command.user.settings.UsersSettingsCommand;
 import com.my.dao.DAOFactory;
-import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 
 public class CommandFactory {
-
-    private static final Logger LOGGER = Logger.getLogger(CommandFactory.class);
 
     HashMap<String,Command> commands = new HashMap<>();
     DAOFactory daoFactory;
@@ -63,12 +60,10 @@ public class CommandFactory {
         commands.put(CommandConstants.SET_LANG, new SetLangCommand());
     }
 
-    public  Command getCommand(String command){
-       Command c = commands.get(command);
-       if (c == null){
-           LOGGER.error("Command not found");
-           return new ShowAllBooksCommand(daoFactory.getBookDAO());
-       }
-       return c;
+    public  Command getCommand(String command) {
+        if (command == null){
+            return commands.get(CommandConstants.SHOW_ALL_BOOKS);
+        }
+        return commands.get(command);
     }
 }
