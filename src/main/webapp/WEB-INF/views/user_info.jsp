@@ -34,7 +34,7 @@
     </tr>
     <tr>
         <th scope="row"><fmt:message key="blocked"/>:</th>
-        <td><fmt:message key="${sessionScope.user.blocked}"/></td>
+        <td><fmt:message key="${requestScope.user_info.blocked}"/></td>
     </tr>
     </tbody>
 </table>
